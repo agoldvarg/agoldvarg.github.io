@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Better Living Through Code]]></title>
-  <link href="http://agoldvarg.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: How-to | Better Living Through Code]]></title>
+  <link href="http://agoldvarg.github.io/blog/categories/how-to/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
   <updated>2014-09-12T22:58:41-04:00</updated>
   <id>http://agoldvarg.github.io/</id>
@@ -81,19 +81,6 @@ eSATA to SATA cable for adding a 6th drive (Optional)
 Small SSD to act as an App drive (Optional) – I’ll get into this later</p>
 
 <p>With all of my purchases made, I was ready to roll. In part II of this guide, we&rsquo;ll get into the build and software configuration process.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[WELL HELLO THERE]]></title>
-    <link href="http://agoldvarg.github.io/blog/2014/09/12/well-hello-there/"/>
-    <updated>2014-09-12T20:36:18-04:00</updated>
-    <id>http://agoldvarg.github.io/blog/2014/09/12/well-hello-there</id>
-    <content type="html"><![CDATA[<p>My name is Alex. This is my very first post and I couldn&rsquo;t be more excited. This blog will be a record of my quest for code literacy. In between, I might even throw in some wildcard content! Like a media server guide, or an op ed!</p>
-
-<p>I&rsquo;ve been going H.A.M. on <a href="http://www.codecademy.com/">Codecademy</a>. Fankly, it&rsquo;s been very challenging but in the best way possible. So now having a bit of HTML, CSS, and Java under my belt I&rsquo;ll be focusing primarily on Ruby going forward.</p>
-
-<p>In addition to keeping track of my coding trials and tribulations, I&rsquo;m also really looking forward to documenting some of my thoughts on technology. Let&rsquo;s do this!</p>
 ]]></content>
   </entry>
   

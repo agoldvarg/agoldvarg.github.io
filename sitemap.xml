@@ -3,6 +3,14 @@
   
   
   <url>
+    <loc>http://agoldvarg.github.io/blog/2014/09/12/slash-slash-dog-part-i/</loc>
+    
+    <lastmod>2014-09-12T22:44:49-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://agoldvarg.github.io/blog/2014/09/12/well-hello-there/</loc>
     
     <lastmod>2014-09-12T20:36:18-04:00</lastmod>
@@ -13,14 +21,14 @@
   
   <url>
     <loc>http://agoldvarg.github.io/blog/archives/</loc>
-    <lastmod>2014-09-12T22:33:07-04:00</lastmod>
+    <lastmod>2014-09-12T22:58:41-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://agoldvarg.github.io/</loc>
-    <lastmod>2014-09-12T22:33:07-04:00</lastmod>
+    <lastmod>2014-09-12T22:58:41-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
