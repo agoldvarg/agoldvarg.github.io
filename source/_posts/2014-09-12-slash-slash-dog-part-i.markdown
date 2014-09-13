@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "//DOG Part I"
+title: "// DOG Part I"
 date: 2014-09-12 22:44:49 -0400
 comments: true
 categories: [media server, unRAID, how-to, guide, dog, part I]
