@@ -1,0 +1,86 @@
+---
+layout: post
+title: "Go On Git"
+date: 2014-09-13 13:04:34 -0400
+comments: true
+categories: [code, how-to, guide]
+---
+
+So this Git(hub) thing, I had definitely heard of it before and come across it many times before, but hwo do you get started? Honestly, I pretty much followed a combination of several different guides I found through googling, but this post will give me a chance to practice embedding some code snippets using markdown. 
+
+Initial Setup
+-------------
+
+OK, so the first thing you want to do is [install git](http://git-scm.com/) on your local machine. Which is pretty easy on a mac - just download and install like any other piece of software. You should also create an account on [github](https://github.com/join) if you haven't already.
+
+I also reccomend creating a folder on your local user share called git. This will make it easy to find all of your repositiories. Before we go any further we want to globally define our name and email address within git.  To do so, run the following two commands in terminal:
+
+```
+$ git config --global user.name "YourName - Include the Quotation Marks"
+$ git config --global user.email youremail@example.com
+```
+
+Make sure that whatever email address you use matches the email you used when setting up your github account.
+
+If you want to verify what you've just setup, you can run:
+
+```
+$ git config --list
+```
+
+A Project Is Born
+-----------------
+
+Git works as a version tracking framework that allows for one or multiple people to collaborate and effectively manage multiple simultaneus streams when working on a project. So for every project, you can have a centralized "master" version (in this example we will host it on github) and as many local "working" or "source" versions as you want. You'll see that git helps you handle all of the change tracking and merging.
+
+Using the terminal, we are going to create a local project folder by entering in the following commands:
+
+```
+# Navigate to your git folder, if you haven't already
+$ cd git
+
+# Create a new folder for our new project, called party_time
+$ mkdir -p party_time
+
+# Now navigate into the newly created folder and create an invitation list
+$ cd party_time
+$ touch invitees.markdown
+```
+
+OK, we've now finished creating a local project folder and threw in a blank file for our invitation list. We need to tell git to start paying attention to this project (locally and on github).
+
+Enter the following commands to initialize the git repository:
+
+```
+$ git init
+```
+If you remember, git helps us to keep track of multiple versions of the same files. All we've done is create an empty repository on github - but don't worry, this repository is ready and willing to accept our files!
+Before we send anything to the remote repository - let's populate some of our friends on the invitation list. 
+
+Using finder, navigate to git > party_time and open your invitees.markdown file using a text editor. Simply add a few names on the first few rows and save the file.  After you've figured out who you want to invite, its time to tell git we want to send this file up to our repository on github. Enter the following commands to do so:
+
+```
+$ git add .
+```
+
+Don't worry about not getting any acknowledgement. We've told git to pay attention to our new files - but we also need to add a comment to mark this iteration of the file and our updates. Commit the file(s) by entering:
+
+```
+$ git commit -m "Initial deploy of invitees" -a
+```
+
+Now let's define the link between our local and remote repositories for this project. This is telling our local git instance where it should be pushing and pulling from (in this case it will be our github url).
+
+First, go back to your github account and create a public repository named party-time.
+
+```
+$ git remote add origin ssh://git@github.com:agoldvarg/party-time.git
+
+# Lets see if it worked by pulling back a list of our remote repositories
+$ git remote -v
+```
+Finally, let's **push** our code to the remote repository:
+
+```
+$ git push origin master
+```
