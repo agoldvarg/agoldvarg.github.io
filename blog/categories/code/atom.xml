@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Code | Better Living Through Code]]></title>
+  <link href="http://agoldvarg.github.io/blog/categories/code/atom.xml" rel="self"/>
+  <link href="http://agoldvarg.github.io/"/>
+  <updated>2014-09-14T19:41:28-04:00</updated>
+  <id>http://agoldvarg.github.io/</id>
+  <author>
+    <name><![CDATA[Alex Goldvarg]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Go on Git]]></title>
+    <link href="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/"/>
+    <updated>2014-09-13T13:04:34-04:00</updated>
+    <id>http://agoldvarg.github.io/blog/2014/09/13/go-on-git</id>
+    <content type="html"><![CDATA[<p>So this Git(hub) thing, I had definitely heard of it before and come across it many times before, but hwo do you get started? Honestly, I pretty much followed a combination of several different guides I found through googling, but this post will give me a chance to practice embedding some code snippets using markdown.</p>
+
+<h2>Initial Setup</h2>
+
+<p>OK, so the first thing you want to do is <a href="http://git-scm.com/">install git</a> on your local machine. Which is pretty easy on a mac - just download and install like any other piece of software. You should also create an account on <a href="https://github.com/join">github</a> if you haven&rsquo;t already.</p>
+
+<p>I also reccomend creating a folder on your local user share called git. This will make it easy to find all of your repositiories. Before we go any further we want to globally define our name and email address within git.  To do so, run the following two commands in terminal:</p>
+
+<pre><code>$ git config --global user.name "YourName - Include the Quotation Marks"
+$ git config --global user.email youremail@example.com
+</code></pre>
+
+<p>Make sure that whatever email address you use matches the email you used when setting up your github account.</p>
+
+<p>If you want to verify what you&rsquo;ve just setup, you can run:</p>
+
+<pre><code>$ git config --list
+</code></pre>
+
+<h2>A Project Is Born</h2>
+
+<p>Git works as a version tracking framework that allows for one or multiple people to collaborate and effectively manage multiple simultaneus streams when working on a project. So for every project, you can have a centralized &ldquo;master&rdquo; version (in this example we will host it on github) and as many local &ldquo;working&rdquo; or &ldquo;source&rdquo; versions as you want. You&rsquo;ll see that git helps you handle all of the change tracking and merging.</p>
+
+<p>Using the terminal, we are going to create a local project folder by entering in the following commands:</p>
+
+<pre><code># Navigate to your git folder, if you haven't already
+$ cd git
+
+# Create a new folder for our new project, called party_time
+$ mkdir -p party_time
+
+# Now navigate into the newly created folder and create an invitation list
+$ cd party_time
+$ touch invitees.markdown
+</code></pre>
+
+<p>OK, we&rsquo;ve now finished creating a local project folder and threw in a blank file for our invitation list. We need to tell git to start paying attention to this project (locally and on github).</p>
+
+<p>Enter the following commands to initialize the git repository:</p>
+
+<pre><code>$ git init
+</code></pre>
+
+<p>If you remember, git helps us to keep track of multiple versions of the same files. All we&rsquo;ve done is create an empty repository on github - but don&rsquo;t worry, this repository is ready and willing to accept our files!
+Before we send anything to the remote repository - let&rsquo;s populate some of our friends on the invitation list.</p>
+
+<p>Using finder, navigate to git > party_time and open your invitees.markdown file using a text editor. Simply add a few names on the first few rows and save the file.  After you&rsquo;ve figured out who you want to invite, its time to tell git we want to send this file up to our repository on github. Enter the following commands to do so:</p>
+
+<pre><code>$ git add .
+</code></pre>
+
+<p>Don&rsquo;t worry about not getting any acknowledgement. We&rsquo;ve told git to pay attention to our new files - but we also need to add a comment to mark this iteration of the file and our updates. Commit the file(s) by entering:</p>
+
+<pre><code>$ git commit -m "Initial deploy of invitees" -a
+</code></pre>
+
+<p>Now let&rsquo;s define the link between our local and remote repositories for this project. This is telling our local git instance where it should be pushing and pulling from (in this case it will be our github url).</p>
+
+<p>First, go back to your github account and create a public repository named party-time.</p>
+
+<pre><code>$ git remote add origin ssh://git@github.com:agoldvarg/party-time.git
+
+# Lets see if it worked by pulling back a list of our remote repositories
+$ git remote -v
+</code></pre>
+
+<p>Finally, let&rsquo;s <strong>push</strong> our code to the remote repository:</p>
+
+<pre><code>$ git push origin master
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

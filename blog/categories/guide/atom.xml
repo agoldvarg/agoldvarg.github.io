@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Guide | Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/blog/categories/guide/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2014-09-12T23:12:08-04:00</updated>
+  <updated>2014-09-14T19:41:28-04:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -14,71 +14,151 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Go on Git]]></title>
+    <link href="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/"/>
+    <updated>2014-09-13T13:04:34-04:00</updated>
+    <id>http://agoldvarg.github.io/blog/2014/09/13/go-on-git</id>
+    <content type="html"><![CDATA[<p>So this Git(hub) thing, I had definitely heard of it before and come across it many times before, but hwo do you get started? Honestly, I pretty much followed a combination of several different guides I found through googling, but this post will give me a chance to practice embedding some code snippets using markdown.</p>
+
+<h2>Initial Setup</h2>
+
+<p>OK, so the first thing you want to do is <a href="http://git-scm.com/">install git</a> on your local machine. Which is pretty easy on a mac - just download and install like any other piece of software. You should also create an account on <a href="https://github.com/join">github</a> if you haven&rsquo;t already.</p>
+
+<p>I also reccomend creating a folder on your local user share called git. This will make it easy to find all of your repositiories. Before we go any further we want to globally define our name and email address within git.  To do so, run the following two commands in terminal:</p>
+
+<pre><code>$ git config --global user.name "YourName - Include the Quotation Marks"
+$ git config --global user.email youremail@example.com
+</code></pre>
+
+<p>Make sure that whatever email address you use matches the email you used when setting up your github account.</p>
+
+<p>If you want to verify what you&rsquo;ve just setup, you can run:</p>
+
+<pre><code>$ git config --list
+</code></pre>
+
+<h2>A Project Is Born</h2>
+
+<p>Git works as a version tracking framework that allows for one or multiple people to collaborate and effectively manage multiple simultaneus streams when working on a project. So for every project, you can have a centralized &ldquo;master&rdquo; version (in this example we will host it on github) and as many local &ldquo;working&rdquo; or &ldquo;source&rdquo; versions as you want. You&rsquo;ll see that git helps you handle all of the change tracking and merging.</p>
+
+<p>Using the terminal, we are going to create a local project folder by entering in the following commands:</p>
+
+<pre><code># Navigate to your git folder, if you haven't already
+$ cd git
+
+# Create a new folder for our new project, called party_time
+$ mkdir -p party_time
+
+# Now navigate into the newly created folder and create an invitation list
+$ cd party_time
+$ touch invitees.markdown
+</code></pre>
+
+<p>OK, we&rsquo;ve now finished creating a local project folder and threw in a blank file for our invitation list. We need to tell git to start paying attention to this project (locally and on github).</p>
+
+<p>Enter the following commands to initialize the git repository:</p>
+
+<pre><code>$ git init
+</code></pre>
+
+<p>If you remember, git helps us to keep track of multiple versions of the same files. All we&rsquo;ve done is create an empty repository on github - but don&rsquo;t worry, this repository is ready and willing to accept our files!
+Before we send anything to the remote repository - let&rsquo;s populate some of our friends on the invitation list.</p>
+
+<p>Using finder, navigate to git > party_time and open your invitees.markdown file using a text editor. Simply add a few names on the first few rows and save the file.  After you&rsquo;ve figured out who you want to invite, its time to tell git we want to send this file up to our repository on github. Enter the following commands to do so:</p>
+
+<pre><code>$ git add .
+</code></pre>
+
+<p>Don&rsquo;t worry about not getting any acknowledgement. We&rsquo;ve told git to pay attention to our new files - but we also need to add a comment to mark this iteration of the file and our updates. Commit the file(s) by entering:</p>
+
+<pre><code>$ git commit -m "Initial deploy of invitees" -a
+</code></pre>
+
+<p>Now let&rsquo;s define the link between our local and remote repositories for this project. This is telling our local git instance where it should be pushing and pulling from (in this case it will be our github url).</p>
+
+<p>First, go back to your github account and create a public repository named party-time.</p>
+
+<pre><code>$ git remote add origin ssh://git@github.com:agoldvarg/party-time.git
+
+# Lets see if it worked by pulling back a list of our remote repositories
+$ git remote -v
+</code></pre>
+
+<p>Finally, let&rsquo;s <strong>push</strong> our code to the remote repository:</p>
+
+<pre><code>$ git push origin master
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[// DOG Part I]]></title>
     <link href="http://agoldvarg.github.io/blog/2014/09/12/slash-slash-dog-part-i/"/>
     <updated>2014-09-12T22:44:49-04:00</updated>
     <id>http://agoldvarg.github.io/blog/2014/09/12/slash-slash-dog-part-i</id>
-    <content type="html"><![CDATA[<p>So I’ve always been meaning to write up a guide/how-to/personal journal of how I built and setup my very own personal home media server. The following is meant to be both a memoir as an easy to follow guide that should spell out the process itself and hopefully help others avoid some of the pitfalls that I struggled through (and eventually triumphed over). There is SO much to cover, so I’ll be breaking this out into a multi-part series  – and off we go!</p>
+    <content type="html"><![CDATA[<p>So I’ve always been meaning to write up a guide about how I built and setup my very own personal home media server. The following is meant to be both a memoir and an easy to follow guide that should spell out the process itself and hopefully help others avoid some of the pitfalls that I struggled through but eventually triumphed over. There is SO much to cover, so I’ll be breaking this out into a multi-part series – and off we go!</p>
 
 <h2>A Growing Problem</h2>
 
-<p>I found myself stuck in a recurring cycle. I would buy a new external hard drive and fill it up over time but inevitably, I’d start running out of space and need to buy another one with a larger capacity. And every time I’d have to go through the painful process of scrubbing and copying all of my data from the old drive to the new drive. It is never fun having to decide “do I really need all 139 episodes of MacGyver?” (of course, the answer to that question is always “Yes”). But if I wanted to completely backup the new, and largest capacity, drive, I had to spread the backup across multiple lower capacity drives. This process was not only prohibitively expensive; it only provided me with a single back-up as of a particular point in time.</p>
-
-<p>Of course, living in a small apartment means that my coffee table also does double-duty as my desk which meant there was no easy way for me to access any of the drives on a regular basis since I’d have to get the hard drive out and set it up with my laptop every time I wanted to get to any of the data.</p>
+<p>I found myself stuck in a recurring cycle. I would buy a new external hard drive and after a period of time, I’d inevitably start running out of space. My only option was to buy another one with a larger capacity. And every time I’d have to go through the painful process of scrubbing and copying all of my data from the old drive to the new drive. It&rsquo;s never fun having to decide “do I really need all 139 episodes of MacGyver?” (of course, the answer to that question is “Yes”). In order to backup the new, and largest capacity, drive I had to spread my files across multiple lower capacity drives. This process was not only prohibitively expensive; it left me with a point in time backup, as opposed to a live-backup.</p>
 
 <p>Clearly I needed a better solution so I started researching the various options out there for backing up, accessing, and streaming my data.</p>
 
 <h2>Requirements</h2>
 
-<p>I quickly learned that choosing the right backup solution totally depends on your individual needs. My key requirements for this project can be summarized as follows:</p>
+<p>I learned that choosing the right backup solution totally depends on one&rsquo;s individual needs. My requirements were as follows:</p>
 
 <ul>
-<li>Must be expandable. Adding additional capacity down the road should be relatively painless.</li>
-<li>Must be remotely accessible. I want to be able to stream data to PCs on my local wireless network, an existing small form factor HTPC, and a rasberri pi.  Mobile streaming is a bonus but wasn’t an absolute must-have.</li>
-<li>Must automatically provide data redundancy (i.e. backup!).</li>
-<li>Must be able to incorporate all, or at least some, of my existing HDDs</li>
-<li>Low-Cost: I wasn’t looking to break the bank</li>
+<li> Must be expandable. Adding additional capacity down the road should be relatively painless.</li>
+<li> Must be remotely accessible. I want to be able to stream data to PCs on my local wireless network, an existing small form factor HTPC, and a rasberri pi.  Mobile streaming is a bonus but wasn’t an absolute must-have.</li>
+<li> Must automatically provide data redundancy (i.e. backup!).</li>
+<li> Must be able to incorporate all, or at least some, of my existing HDDs</li>
+<li> Low-Cost: I wasn&rsquo;t looking to break the bank</li>
 </ul>
 
 
-<h2>To RAID? Or not to RAID (unRAID)?</h2>
+<h2>To RAID? Or not to RAID? <em>Or unRAID?</em></h2>
 
-<p>You may have heard of RAID (Redundant Array of Inexpensive or Independent Disks) which, put simply, is a technology used to combine multiple drives into a logical unit for storing data. Depending on the type of RAID implementation there are different benefits and drawbacks, be it speed, space, redundancy, etc. which for the purposes of this post I won’t delve too deep into. But for my needs, I found that a “spinoff” of RAID, appropriately named unRAID, seemed to be the best of all worlds.</p>
+<p>You may already have heard of RAID (Redundant Array of Inexpensive or Independent Disks) which to put it simply is a technology for combining multiple drives into a logical unit for data storage. Depending on the type of RAID implementation there are different benefits and drawbacks: be it speed, space, security, etc. which for the purposes of this post I won&rsquo;t delve into. I found that a spin off of RAID, appropriately named unRAID, seemed to offer the best combination of features for my needs.</p>
 
-<p>What is unRAID exactly and why should I care? Well, <a href="http://lime-technology.com/technology/">this website</a> does a pretty good job of explaining it but the most important benefits over traditional RAID is that it was specifically designed for storing digital media. It would allow me to easily store and share data across a network while protecting it at the same time. unRAID also would allow me to reuse the hard drives I already own (mixing and matching), add capacity as I need it, and automatically has redundancy, or as unRAID refers to it, “Parity” built right in. It really seemed like I found…  <strong>The PERFECT SOLUTION!</strong></p>
+<p>What is unRAID exactly and why should I care? Well, <a href="http://lime-technology.com/technology/">this website</a> does a pretty good job of explaining it but unRAID was specifically designed for storing and serving digital media across a network while protecting it at the same time. unRAID also would allow me to reuse the hard drives I already own, add capacity as needed, automatically back up my data - unRAID calls this “Parity.” It really seemed like I found…  <strong>THE ALMOST PERFECT SOLUTION!</strong></p>
 
-<p>So, having chosen my RAID implementation of choice, my next move was to pick out the hardware…</p>
+<p>So having chosen my RAID implementation of choice my next move was to pick out the hardware…</p>
 
 <h2>The little server that could</h2>
 
-<p>One of the best things about building an unRAID server is the optionality one has in terms of hardware choices. Being that unRAID is linux based, the hardware combinations that would work are truly endless – which might be kind of overwhelming. I wasn’t looking to buy and build a PC component by component so I started researching semi-complete server boxes that would run unRAID. Luckily, HP just happens to sell these pretty sweet little compact server boxes that can hold multiple drives. There were several posts on unRAID forums from users who had great success using them as media servers, and when I found one of them on sale through Newegg, I pounced. The specific model I chose was the N40L HP Microserver, with a 5-drive capacity (more than 5 drives can be squeezed in there too).</p>
+<p>One of the best things about building an unRAID server is the optionality one has in terms of hardware choices. Being that unRAID is Linux based, the hardware combinations one can use are nearly endless – which may seem kind of overwhelming at  first. In my case, I wasn’t looking to buy and build a PC component by component so I started researching semi-complete server boxes that would run unRAID.</p>
 
-<p>What I liked:</p>
+<p>Luckily, HP just happens to sell these sweet little compact servers with multiple drive capacity. There were several posts on unRAID forums from users who had great success using them as media servers and when I found one of them on sale through Newegg, I pounced. The specific model was the N40L HP Microserver, with a 5-drive capacity (although more than 5 drives can be squeezed in there with a little creativity).</p>
+
+<p>What I loved:</p>
 
 <ul>
-<li>Low power draw and very quiet</li>
-<li>Compact form factor</li>
-<li>CHEAP!</li>
-<li>Easy Access / Easy Drive Swapping</li>
+<li> Low power draw and very quiet</li>
+<li> Compact form factor</li>
+<li> Easy Access / Easy Drive Swapping</li>
+<li> CHEAP!</li>
 </ul>
 
 
-<p>What I didn’t like:</p>
+<p>What I didn&rsquo;t love:</p>
 
 <ul>
-<li>Relatively Low-Power CPU/GPU – Limits transcoding capability for Plex Purposes</li>
-<li>Requires some modification in order to fit 6 or more drives (although this is really the fun part J)</li>
-<li>Comes with a 250GB drive that I didn’t need</li>
+<li> Low-Power CPU/GPU – Limits transcoding capability for Plex Purposes</li>
 </ul>
 
 
-<p>With this server, I knew I’d be able to have anywhere from 16TB all the way up to 20+ TB of available capacity (assuming 4TB drives). This would give me plenty of headroom for years to come – and as I mentioned earlier, unRAID makes increasing capacity very easy, so I could always upgrade to larger drives down the road.</p>
+<p>The total storage capacity could go up to 20TB using 4TB individual drives. This would give me plenty of headroom for years to come – and as I mentioned earlier unRAID makes increasing capacity very easy so I could always upgrade to larger drives down the road.</p>
 
-<p>As I said, you can certainly choose components piece by piece, but as far I was concerned, the microserver suited my needs just fine.  There were a few other items I needed to purchase before I could get started:
-USB Key to store and run the actual unRAID software (Required)
-5.25” Drive Bay for adding the 5th Drive (Optional)
-eSATA to SATA cable for adding a 6th drive (Optional)
-Small SSD to act as an App drive (Optional) – I’ll get into this later</p>
+<p>Don&rsquo;t get me wrong, you can certainly choose components piece by piece but as far I was concerned the microserver suited my needs just fine.  There were a few other items I needed to purchase before I could get started:</p>
+
+<ul>
+<li> USB Key to store and run the actual unRAID software (Required)</li>
+<li> 5.25” Drive Bay for adding the 5th Drive (Optional)</li>
+<li> eSATA to SATA cable for adding a 6th drive (Optional)</li>
+<li> Small SSD to act as an App drive (Optional) – I’ll get into this later</li>
+</ul>
+
 
 <p>With all of my purchases made, I was ready to roll. In part II of this guide, we&rsquo;ll get into the build and software configuration process.</p>
 ]]></content>

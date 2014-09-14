@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Better Living Through Code</title>
+  <title>Go on Git - Better Living Through Code</title>
   <meta name="author" content="Alex Goldvarg">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://agoldvarg.github.io">
+  <link rel="canonical" href="http://agoldvarg.github.io/blog/2014/09/13/go-on-git">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Better Living Through Code" type="application/atom+xml">
@@ -63,15 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/13/go-on-git/">Go on Git</a></h1>
+      <h1 class="entry-title">Go on Git</h1>
     
     
       <p class="meta">
@@ -87,7 +84,7 @@
   </header>
 
 
-  <div class="entry-content"><p>So this Git(hub) thing, I had definitely heard of it before and come across it many times before, but hwo do you get started? Honestly, I pretty much followed a combination of several different guides I found through googling, but this post will give me a chance to practice embedding some code snippets using markdown.</p>
+<div class="entry-content"><p>So this Git(hub) thing, I had definitely heard of it before and come across it many times before, but hwo do you get started? Honestly, I pretty much followed a combination of several different guides I found through googling, but this post will give me a chance to practice embedding some code snippets using markdown.</p>
 
 <h2>Initial Setup</h2>
 
@@ -178,144 +175,52 @@ Before we send anything to the remote repository - let&rsquo;s populate some of 
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ git push origin master</span></code></pre></td></tr></table></div></figure>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/12/slash-slash-dog-part-i/">// DOG Part I</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-12T22:44:49-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:44 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So I’ve always been meaning to write up a guide about how I built and setup my very own personal home media server. The following is meant to be both a memoir and an easy to follow guide that should spell out the process itself and hopefully help others avoid some of the pitfalls that I struggled through but eventually triumphed over. There is SO much to cover, so I’ll be breaking this out into a multi-part series – and off we go!</p>
-
-<h2>A Growing Problem</h2>
-
-<p>I found myself stuck in a recurring cycle. I would buy a new external hard drive and after a period of time, I’d inevitably start running out of space. My only option was to buy another one with a larger capacity. And every time I’d have to go through the painful process of scrubbing and copying all of my data from the old drive to the new drive. It&rsquo;s never fun having to decide “do I really need all 139 episodes of MacGyver?” (of course, the answer to that question is “Yes”). In order to backup the new, and largest capacity, drive I had to spread my files across multiple lower capacity drives. This process was not only prohibitively expensive; it left me with a point in time backup, as opposed to a live-backup.</p>
-
-<p>Clearly I needed a better solution so I started researching the various options out there for backing up, accessing, and streaming my data.</p>
-
-<h2>Requirements</h2>
-
-<p>I learned that choosing the right backup solution totally depends on one&rsquo;s individual needs. My requirements were as follows:</p>
-
-<ul>
-<li> Must be expandable. Adding additional capacity down the road should be relatively painless.</li>
-<li> Must be remotely accessible. I want to be able to stream data to PCs on my local wireless network, an existing small form factor HTPC, and a rasberri pi.  Mobile streaming is a bonus but wasn’t an absolute must-have.</li>
-<li> Must automatically provide data redundancy (i.e. backup!).</li>
-<li> Must be able to incorporate all, or at least some, of my existing HDDs</li>
-<li> Low-Cost: I wasn&rsquo;t looking to break the bank</li>
-</ul>
-
-
-<h2>To RAID? Or not to RAID? <em>Or unRAID?</em></h2>
-
-<p>You may already have heard of RAID (Redundant Array of Inexpensive or Independent Disks) which to put it simply is a technology for combining multiple drives into a logical unit for data storage. Depending on the type of RAID implementation there are different benefits and drawbacks: be it speed, space, security, etc. which for the purposes of this post I won&rsquo;t delve into. I found that a spin off of RAID, appropriately named unRAID, seemed to offer the best combination of features for my needs.</p>
-
-<p>What is unRAID exactly and why should I care? Well, <a href="http://lime-technology.com/technology/">this website</a> does a pretty good job of explaining it but unRAID was specifically designed for storing and serving digital media across a network while protecting it at the same time. unRAID also would allow me to reuse the hard drives I already own, add capacity as needed, automatically back up my data - unRAID calls this “Parity.” It really seemed like I found…  <strong>THE ALMOST PERFECT SOLUTION!</strong></p>
-
-<p>So having chosen my RAID implementation of choice my next move was to pick out the hardware…</p>
-
-<h2>The little server that could</h2>
-
-<p>One of the best things about building an unRAID server is the optionality one has in terms of hardware choices. Being that unRAID is Linux based, the hardware combinations one can use are nearly endless – which may seem kind of overwhelming at  first. In my case, I wasn’t looking to buy and build a PC component by component so I started researching semi-complete server boxes that would run unRAID.</p>
-
-<p>Luckily, HP just happens to sell these sweet little compact servers with multiple drive capacity. There were several posts on unRAID forums from users who had great success using them as media servers and when I found one of them on sale through Newegg, I pounced. The specific model was the N40L HP Microserver, with a 5-drive capacity (although more than 5 drives can be squeezed in there with a little creativity).</p>
-
-<p>What I loved:</p>
-
-<ul>
-<li> Low power draw and very quiet</li>
-<li> Compact form factor</li>
-<li> Easy Access / Easy Drive Swapping</li>
-<li> CHEAP!</li>
-</ul>
-
-
-<p>What I didn&rsquo;t love:</p>
-
-<ul>
-<li> Low-Power CPU/GPU – Limits transcoding capability for Plex Purposes</li>
-</ul>
-
-
-<p>The total storage capacity could go up to 20TB using 4TB individual drives. This would give me plenty of headroom for years to come – and as I mentioned earlier unRAID makes increasing capacity very easy so I could always upgrade to larger drives down the road.</p>
-
-<p>Don&rsquo;t get me wrong, you can certainly choose components piece by piece but as far I was concerned the microserver suited my needs just fine.  There were a few other items I needed to purchase before I could get started:</p>
-
-<ul>
-<li> USB Key to store and run the actual unRAID software (Required)</li>
-<li> 5.25” Drive Bay for adding the 5th Drive (Optional)</li>
-<li> eSATA to SATA cable for adding a 6th drive (Optional)</li>
-<li> Small SSD to act as an App drive (Optional) – I’ll get into this later</li>
-</ul>
-
-
-<p>With all of my purchases made, I was ready to roll. In part II of this guide, we&rsquo;ll get into the build and software configuration process.</p>
-</div>
-  
   
 
+<span class="byline author vcard">Posted by <span class="fn">Alex Goldvarg</span></span>
 
-    </article>
-  
-  
-    <article>
       
-  <header>
+
+
+
+
+<time class='entry-date' datetime='2014-09-13T13:04:34-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>1:04 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>code</a>, <a class='category' href='/blog/categories/guide/'>guide</a>, <a class='category' href='/blog/categories/how-to/'>how-to</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/12/well-hello-there/">WELL HELLO THERE</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-12T20:36:18-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:36 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>My name is Alex. This is my very first post and I couldn&rsquo;t be more excited. This blog will be a record of my quest for code literacy. In between, I might even throw in some wildcard content! Like a media server guide, or an op ed!</p>
-
-<p>I&rsquo;ve been going H.A.M. on <a href="http://www.codecademy.com/">Codecademy</a>. Fankly, it&rsquo;s been very challenging but in the best way possible. So now having a bit of HTML, CSS, and Java under my belt I&rsquo;ll be focusing primarily on Ruby going forward.</p>
-
-<p>In addition to keeping track of my coding trials and tribulations, I&rsquo;m also really looking forward to documenting some of my thoughts on technology. Let&rsquo;s do this!</p>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/" data-via="" data-counturl="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/12/slash-slash-dog-part-i/" title="Previous Post: // DOG Part I">&laquo; // DOG Part I</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -343,6 +248,7 @@ Before we send anything to the remote repository - let&rsquo;s populate some of 
 
   
 </aside>
+
 
     </div>
   </div>
