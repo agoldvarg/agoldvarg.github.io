@@ -1,28 +1,26 @@
 ---
 layout: post
-title: "Go On Git"
+title: "Go On, Git"
 date: 2014-09-13 13:04:34 -0400
 comments: true
 categories: [code, how-to, guide]
 ---
 
-So this Git(hub) thing, I had definitely heard of it before and come across it many times before, but hwo do you get started? Honestly, I pretty much followed a combination of several different guides I found through googling, but this post will give me a chance to practice embedding some code snippets using markdown. 
+Git(hub) - I've come across it so many times but never actually taken the plunge. Luckily it's very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.
 
 Initial Setup
 -------------
 
-OK, so the first thing you want to do is [install git](http://git-scm.com/) on your local machine. Which is pretty easy on a mac - just download and install like any other piece of software. You should also create an account on [github](https://github.com/join) if you haven't already.
+OK, so the first step was to [install git](http://git-scm.com/) on my local machine and create an account on [github](https://github.com/join).
 
-I also reccomend creating a folder on your local user share called git. This will make it easy to find all of your repositiories. Before we go any further we want to globally define our name and email address within git.  To do so, run the following two commands in terminal:
+I like using a top-level folder named git which makes it easy to keep track of  my repositiories. The very first thing I needed to do was define my name and email address within git.  To do so, I ran the following two commands in terminal:
 
 ```
-$ git config --global user.name "YourName - Include the Quotation Marks"
+$ git config --global user.name "YourName"
 $ git config --global user.email youremail@example.com
 ```
 
-Make sure that whatever email address you use matches the email you used when setting up your github account.
-
-If you want to verify what you've just setup, you can run:
+To verify, I can run:
 
 ```
 $ git config --list
@@ -31,56 +29,65 @@ $ git config --list
 A Project Is Born
 -----------------
 
-Git works as a version tracking framework that allows for one or multiple people to collaborate and effectively manage multiple simultaneus streams when working on a project. So for every project, you can have a centralized "master" version (in this example we will host it on github) and as many local "working" or "source" versions as you want. You'll see that git helps you handle all of the change tracking and merging.
+Git works as a version tracking framework that allows for one or multiple people to collaborate on and manage simultaneus streams when working on a project. So for every project, I can have a centralized master version (in this example I'm hosting my repository on github) and as many local working versions as I want. Git is so awesome.
 
-Using the terminal, we are going to create a local project folder by entering in the following commands:
+Using the terminal, I can create a local project folder by entering in the following commands:
 
 ```
-# Navigate to your git folder, if you haven't already
+# Navigate to your git folder
 $ cd git
 
-# Create a new folder for our new project, called party_time
+# Create a folder for my new project
 $ mkdir -p party_time
 
-# Now navigate into the newly created folder and create an invitation list
+# Navigate to the new folder and create an essential file
 $ cd party_time
 $ touch invitees.markdown
 ```
 
-OK, we've now finished creating a local project folder and threw in a blank file for our invitation list. We need to tell git to start paying attention to this project (locally and on github).
+I need to tell git to start paying attention to this project.
 
-Enter the following commands to initialize the git repository:
+So I enter the following command to initialize the git repository:
 
 ```
 $ git init
 ```
-If you remember, git helps us to keep track of multiple versions of the same files. All we've done is create an empty repository on github - but don't worry, this repository is ready and willing to accept our files!
-Before we send anything to the remote repository - let's populate some of our friends on the invitation list. 
 
-Using finder, navigate to git > party_time and open your invitees.markdown file using a text editor. Simply add a few names on the first few rows and save the file.  After you've figured out who you want to invite, its time to tell git we want to send this file up to our repository on github. Enter the following commands to do so:
+All I've done is create an empty repository on github that is ready to accept my files!
+
+After I figured out who I want to invite, I needed to tell git to gather the files to be commited:
 
 ```
 $ git add .
 ```
 
-Don't worry about not getting any acknowledgement. We've told git to pay attention to our new files - but we also need to add a comment to mark this iteration of the file and our updates. Commit the file(s) by entering:
+To add a comment and Commit the file(s):
 
 ```
 $ git commit -m "Initial deploy of invitees" -a
 ```
 
-Now let's define the link between our local and remote repositories for this project. This is telling our local git instance where it should be pushing and pulling from (in this case it will be our github url).
+Now I had to define the link between my local and remote repositories for this project. I have to tell git where it should be pushing and pulling from (in this case it will be my github url).
 
-First, go back to your github account and create a public repository named party-time.
+After creating a public repository named party-time:
 
 ```
-$ git remote add origin ssh://git@github.com:agoldvarg/party-time.git
+$ git remote add origin ssh://git@github.com:yourusername/party-time.git
 
-# Lets see if it worked by pulling back a list of our remote repositories
+# Check it by pulling back a list of remote repositories
 $ git remote -v
 ```
-Finally, let's **push** our code to the remote repository:
+Finally, I'll **push** my file to the remote repository:
 
 ```
 $ git push origin master
 ```
+If everything went according to plan, my local and remote repositories are synced.
+
+ I like to pull down a fresh copy of my remote repository before messing around with existing files on my local machine.  I do this to ensure that everything is in sync by entering:
+
+```
+$ git pull origin master
+```
+
+So, an easy example for getting familiar with git. Next step, a real code  project on my repository!
