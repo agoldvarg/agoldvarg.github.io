@@ -4,7 +4,7 @@
   <title><![CDATA[Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2014-09-14T19:41:28-04:00</updated>
+  <updated>2014-09-15T00:03:15-04:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -14,27 +14,25 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Go on Git]]></title>
+    <title type="html"><![CDATA[Go on, Git]]></title>
     <link href="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/"/>
     <updated>2014-09-13T13:04:34-04:00</updated>
     <id>http://agoldvarg.github.io/blog/2014/09/13/go-on-git</id>
-    <content type="html"><![CDATA[<p>So this Git(hub) thing, I had definitely heard of it before and come across it many times before, but hwo do you get started? Honestly, I pretty much followed a combination of several different guides I found through googling, but this post will give me a chance to practice embedding some code snippets using markdown.</p>
+    <content type="html"><![CDATA[<p>Git(hub) - I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
 
 <h2>Initial Setup</h2>
 
-<p>OK, so the first thing you want to do is <a href="http://git-scm.com/">install git</a> on your local machine. Which is pretty easy on a mac - just download and install like any other piece of software. You should also create an account on <a href="https://github.com/join">github</a> if you haven&rsquo;t already.</p>
+<p>OK, so the first step was to <a href="http://git-scm.com/">install git</a> on my local machine and create an account on <a href="https://github.com/join">github</a>.</p>
 
-<p>I also reccomend creating a folder on your local user share called git. This will make it easy to find all of your repositiories. Before we go any further we want to globally define our name and email address within git.  To do so, run the following two commands in terminal:</p>
+<p>I like using a top-level folder named git which makes it easy to keep track of  my repositiories. The very first thing I needed to do was define my name and email address within git.  To do so, I ran the following two commands in terminal:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --global user.name "YourName - Include the Quotation Marks"
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --global user.name "YourName"
 </span><span class='line'>$ git config --global user.email youremail@example.com</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Make sure that whatever email address you use matches the email you used when setting up your github account.</p>
-
-<p>If you want to verify what you&rsquo;ve just setup, you can run:</p>
+<p>To verify, I can run:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --list</span></code></pre></td></tr></table></div></figure>
@@ -42,9 +40,9 @@
 
 <h2>A Project Is Born</h2>
 
-<p>Git works as a version tracking framework that allows for one or multiple people to collaborate and effectively manage multiple simultaneus streams when working on a project. So for every project, you can have a centralized &ldquo;master&rdquo; version (in this example we will host it on github) and as many local &ldquo;working&rdquo; or &ldquo;source&rdquo; versions as you want. You&rsquo;ll see that git helps you handle all of the change tracking and merging.</p>
+<p>Git works as a version tracking framework that allows for one or multiple people to collaborate on and manage simultaneus streams when working on a project. So for every project, I can have a centralized master version (in this example I&rsquo;m hosting my repository on github) and as many local working versions as I want. Git is so awesome.</p>
 
-<p>Using the terminal, we are going to create a local project folder by entering in the following commands:</p>
+<p>Using the terminal, I can create a local project folder by entering in the following commands:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -55,59 +53,68 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Navigate to your git folder, if you haven't already
+</pre></td><td class='code'><pre><code class=''><span class='line'># Navigate to your git folder
 </span><span class='line'>$ cd git
 </span><span class='line'>
-</span><span class='line'># Create a new folder for our new project, called party_time
+</span><span class='line'># Create a folder for my new project
 </span><span class='line'>$ mkdir -p party_time
 </span><span class='line'>
-</span><span class='line'># Now navigate into the newly created folder and create an invitation list
+</span><span class='line'># Navigate to the new folder and create an essential file
 </span><span class='line'>$ cd party_time
 </span><span class='line'>$ touch invitees.markdown</span></code></pre></td></tr></table></div></figure>
 
 
-<p>OK, we&rsquo;ve now finished creating a local project folder and threw in a blank file for our invitation list. We need to tell git to start paying attention to this project (locally and on github).</p>
+<p>I need to tell git to start paying attention to this project.</p>
 
-<p>Enter the following commands to initialize the git repository:</p>
+<p>So I enter the following command to initialize the git repository:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ git init</span></code></pre></td></tr></table></div></figure>
 
 
-<p>If you remember, git helps us to keep track of multiple versions of the same files. All we&rsquo;ve done is create an empty repository on github - but don&rsquo;t worry, this repository is ready and willing to accept our files!
-Before we send anything to the remote repository - let&rsquo;s populate some of our friends on the invitation list.</p>
+<p>All I&rsquo;ve done is create an empty repository on github that is ready to accept my files!</p>
 
-<p>Using finder, navigate to git > party_time and open your invitees.markdown file using a text editor. Simply add a few names on the first few rows and save the file.  After you&rsquo;ve figured out who you want to invite, its time to tell git we want to send this file up to our repository on github. Enter the following commands to do so:</p>
+<p>After I figured out who I want to invite, I needed to tell git to gather the files to be commited:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Don&rsquo;t worry about not getting any acknowledgement. We&rsquo;ve told git to pay attention to our new files - but we also need to add a comment to mark this iteration of the file and our updates. Commit the file(s) by entering:</p>
+<p>To add a comment and Commit the file(s):</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ git commit -m "Initial deploy of invitees" -a</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now let&rsquo;s define the link between our local and remote repositories for this project. This is telling our local git instance where it should be pushing and pulling from (in this case it will be our github url).</p>
+<p>Now I had to define the link between my local and remote repositories for this project. I have to tell git where it should be pushing and pulling from (in this case it will be my github url).</p>
 
-<p>First, go back to your github account and create a public repository named party-time.</p>
+<p>After creating a public repository named party-time:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add origin ssh://git@github.com:agoldvarg/party-time.git
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add origin ssh://git@github.com:yourusername/party-time.git
 </span><span class='line'>
-</span><span class='line'># Lets see if it worked by pulling back a list of our remote repositories
+</span><span class='line'># Check it by pulling back a list of remote repositories
 </span><span class='line'>$ git remote -v</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Finally, let&rsquo;s <strong>push</strong> our code to the remote repository:</p>
+<p>Finally, I&rsquo;ll <strong>push</strong> my file to the remote repository:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ git push origin master</span></code></pre></td></tr></table></div></figure>
 
+
+<p>If everything went according to plan, my local and remote repositories are synced.</p>
+
+<p> I like to pull down a fresh copy of my remote repository before messing around with existing files on my local machine.  I do this to ensure that everything is in sync by entering:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git pull origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, an easy example for getting familiar with git. Next step, a real code  project on my repository!</p>
 ]]></content>
   </entry>
   
