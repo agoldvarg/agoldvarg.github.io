@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Part I | Better Living Through Code]]></title>
+  <link href="http://agoldvarg.github.io/blog/categories/part-i/atom.xml" rel="self"/>
+  <link href="http://agoldvarg.github.io/"/>
+  <updated>2014-11-02T22:35:22-05:00</updated>
+  <id>http://agoldvarg.github.io/</id>
+  <author>
+    <name><![CDATA[Alex Goldvarg]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[// DOG Part I]]></title>
+    <link href="http://agoldvarg.github.io/blog/2014/09/12/slash-slash-dog-part-i/"/>
+    <updated>2014-09-12T22:44:49-04:00</updated>
+    <id>http://agoldvarg.github.io/blog/2014/09/12/slash-slash-dog-part-i</id>
+    <content type="html"><![CDATA[<p>So I’ve always been meaning to write up a guide about how I built and setup my very own personal home media server. The following is meant to be both a memoir and an easy to follow guide that should spell out the process itself and hopefully help others avoid some of the pitfalls that I struggled through but eventually triumphed over. There is SO much to cover, so I’ll be breaking this out into a multi-part series – and off we go!</p>
+
+<h2>A Growing Problem</h2>
+
+<p>I found myself stuck in a recurring cycle. I would buy a new external hard drive and after a period of time, I’d inevitably start running out of space. My only option was to buy another one with a larger capacity. And every time I’d have to go through the painful process of scrubbing and copying all of my data from the old drive to the new drive. It&rsquo;s never fun having to decide “do I really need all 139 episodes of MacGyver?” (of course, the answer to that question is “Yes”). In order to backup the new, and largest capacity, drive I had to spread my files across multiple lower capacity drives. This process was not only prohibitively expensive; it left me with a point in time backup, as opposed to a live-backup.</p>
+
+<p>Clearly I needed a better solution so I started researching the various options out there for backing up, accessing, and streaming my data.</p>
+
+<h2>Requirements</h2>
+
+<p>I learned that choosing the right backup solution totally depends on one&rsquo;s individual needs. My requirements were as follows:</p>
+
+<ul>
+<li> Must be expandable. Adding additional capacity down the road should be relatively painless.</li>
+<li> Must be remotely accessible. I want to be able to stream data to PCs on my local wireless network, an existing small form factor HTPC, and a rasberri pi.  Mobile streaming is a bonus but wasn’t an absolute must-have.</li>
+<li> Must automatically provide data redundancy (i.e. backup!).</li>
+<li> Must be able to incorporate all, or at least some, of my existing HDDs</li>
+<li> Low-Cost: I wasn&rsquo;t looking to break the bank</li>
+</ul>
+
+
+<h2>To RAID? Or not to RAID? <em>Or unRAID?</em></h2>
+
+<p>You may already have heard of RAID (Redundant Array of Inexpensive or Independent Disks) which to put it simply is a technology for combining multiple drives into a logical unit for data storage. Depending on the type of RAID implementation there are different benefits and drawbacks: be it speed, space, security, etc. which for the purposes of this post I won&rsquo;t delve into. I found that a spin off of RAID, appropriately named unRAID, seemed to offer the best combination of features for my needs.</p>
+
+<p>What is unRAID exactly and why should I care? Well, <a href="http://lime-technology.com/technology/">this website</a> does a pretty good job of explaining it but unRAID was specifically designed for storing and serving digital media across a network while protecting it at the same time. unRAID also would allow me to reuse the hard drives I already own, add capacity as needed, automatically back up my data - unRAID calls this “Parity.” It really seemed like I found…  <strong>THE ALMOST PERFECT SOLUTION!</strong></p>
+
+<p>So having chosen my RAID implementation of choice my next move was to pick out the hardware…</p>
+
+<h2>The little server that could</h2>
+
+<p>One of the best things about building an unRAID server is the optionality one has in terms of hardware choices. Being that unRAID is Linux based, the hardware combinations one can use are nearly endless – which may seem kind of overwhelming at  first. In my case, I wasn’t looking to buy and build a PC component by component so I started researching semi-complete server boxes that would run unRAID.</p>
+
+<p>Luckily, HP just happens to sell these sweet little compact servers with multiple drive capacity. There were several posts on unRAID forums from users who had great success using them as media servers and when I found one of them on sale through Newegg, I pounced. The specific model was the N40L HP Microserver, with a 5-drive capacity (although more than 5 drives can be squeezed in there with a little creativity).</p>
+
+<p>What I loved:</p>
+
+<ul>
+<li> Low power draw and very quiet</li>
+<li> Compact form factor</li>
+<li> Easy Access / Easy Drive Swapping</li>
+<li> CHEAP!</li>
+</ul>
+
+
+<p>What I didn&rsquo;t love:</p>
+
+<ul>
+<li> Low-Power CPU/GPU – Limits transcoding capability for Plex Purposes</li>
+</ul>
+
+
+<p>The total storage capacity could go up to 20TB using 4TB individual drives. This would give me plenty of headroom for years to come – and as I mentioned earlier unRAID makes increasing capacity very easy so I could always upgrade to larger drives down the road.</p>
+
+<p>Don&rsquo;t get me wrong, you can certainly choose components piece by piece but as far I was concerned the microserver suited my needs just fine.  There were a few other items I needed to purchase before I could get started:</p>
+
+<ul>
+<li> USB Key to store and run the actual unRAID software (Required)</li>
+<li> 5.25” Drive Bay for adding the 5th Drive (Optional)</li>
+<li> eSATA to SATA cable for adding a 6th drive (Optional)</li>
+<li> Small SSD to act as an App drive (Optional) – I’ll get into this later</li>
+</ul>
+
+
+<p>With all of my purchases made, I was ready to roll. In part II of this guide, we&rsquo;ll get into the build and software configuration process.</p>
+]]></content>
+  </entry>
+  
+</feed>

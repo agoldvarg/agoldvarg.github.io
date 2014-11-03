@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Go on, Git - Better Living Through Code</title>
+  <meta name="author" content="Alex Goldvarg">
+
+  
+  <meta name="description" content="Git(hub) - I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://agoldvarg.github.io/blog/2014/09/13/go-on-git">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Better Living Through Code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Better Living Through Code</a></h1>
+  
+    <h2>Learning To Code and My Technology Musings.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:agoldvarg.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Go on, Git</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-13T13:04:34-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>1:04 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Git(hub) - I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
+
+<h2>Initial Setup</h2>
+
+<p>OK, so the first step was to <a href="http://git-scm.com/">install git</a> on my local machine and create an account on <a href="https://github.com/join">github</a>.</p>
+
+<p>I like using a top-level folder named git which makes it easy to keep track of  my repositiories. The very first thing I needed to do was define my name and email address within git.  To do so, I ran the following two commands in terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --global user.name "YourName"
+</span><span class='line'>$ git config --global user.email youremail@example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To verify, I can run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --list</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>A Project Is Born</h2>
+
+<p>Git works as a version tracking framework that allows for one or multiple people to collaborate on and manage simultaneus streams when working on a project. So for every project, I can have a centralized master version (in this example I&rsquo;m hosting my repository on github) and as many local working versions as I want. Git is so awesome.</p>
+
+<p>Using the terminal, I can create a local project folder by entering in the following commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Navigate to your git folder
+</span><span class='line'>$ cd git
+</span><span class='line'>
+</span><span class='line'># Create a folder for my new project
+</span><span class='line'>$ mkdir -p party_time
+</span><span class='line'>
+</span><span class='line'># Navigate to the new folder and create an essential file
+</span><span class='line'>$ cd party_time
+</span><span class='line'>$ touch invitees.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I need to tell git to start paying attention to this project.</p>
+
+<p>So I enter the following command to initialize the git repository:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git init</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All I&rsquo;ve done is create an empty repository on github that is ready to accept my files!</p>
+
+<p>After I figured out who I want to invite, I needed to tell git to gather the files to be commited:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To add a comment and Commit the file(s):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git commit -m "Initial deploy of invitees" -a</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now I had to define the link between my local and remote repositories for this project. I have to tell git where it should be pushing and pulling from (in this case it will be my github url).</p>
+
+<p>After creating a public repository named party-time:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add origin ssh://git@github.com:yourusername/party-time.git
+</span><span class='line'>
+</span><span class='line'># Check it by pulling back a list of remote repositories
+</span><span class='line'>$ git remote -v</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, I&rsquo;ll <strong>push</strong> my file to the remote repository:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If everything went according to plan, my local and remote repositories are synced.</p>
+
+<p> I like to pull down a fresh copy of my remote repository before messing around with existing files on my local machine.  I do this to ensure that everything is in sync by entering:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git pull origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, an easy example for getting familiar with git. Next step, a real code  project on my repository!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alex Goldvarg</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-09-13T13:04:34-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>1:04 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>code</a>, <a class='category' href='/blog/categories/guide/'>guide</a>, <a class='category' href='/blog/categories/how-to/'>how-to</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/" data-via="" data-counturl="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/12/slash-slash-dog-part-i/" title="Previous Post: // DOG Part I">&laquo; // DOG Part I</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/11/02/hidden-files-show-yourselves/" title="Next Post: Hidden Files, Show Yourselves!">Hidden Files, Show Yourselves! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/02/hidden-files-show-yourselves/">Hidden Files, Show Yourselves!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/13/go-on-git/">Go on, Git</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/12/slash-slash-dog-part-i/">// DOG Part I</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/12/well-hello-there/">WELL HELLO THERE</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Alex Goldvarg -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

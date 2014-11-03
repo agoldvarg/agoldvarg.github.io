@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://agoldvarg.github.io/blog/2014/11/02/hidden-files-show-yourselves/</loc>
+    <lastmod>2014-11-02T18:36:35-05:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://agoldvarg.github.io/blog/2014/09/13/go-on-git/</loc>
+    <lastmod>2014-09-13T13:04:34-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://agoldvarg.github.io/blog/2014/09/12/slash-slash-dog-part-i/</loc>
+    <lastmod>2014-09-12T22:44:49-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://agoldvarg.github.io/blog/2014/09/12/well-hello-there/</loc>
+    <lastmod>2014-09-12T20:36:18-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://agoldvarg.github.io/blog/archives/</loc>
+    <lastmod>2014-11-02T22:35:22-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://agoldvarg.github.io/</loc>
+    <lastmod>2014-11-02T22:35:22-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
