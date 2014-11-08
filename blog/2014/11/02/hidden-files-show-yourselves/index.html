@@ -102,17 +102,19 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>alias showF='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-</span><span class='line'>alias hideF='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alias reveal='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+</span><span class='line'>alias rehide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Now, I can easily toggle the setting from the command line using my aliases:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ showF #or hideF</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ reveal
+</span><span class='line'>$ rehide</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Learning ways to add efficiency to my workflow has been one of my favorite parts of this programming journey. I&rsquo;m looking at each and every repeated task as a new automation challenge.</p>
+<p>Adding efficiency to my workflow has been one of my favorite parts of this programming journey. I&rsquo;m beginning to look at each and every task as a new automation challenge.</p>
 </div>
 
 
