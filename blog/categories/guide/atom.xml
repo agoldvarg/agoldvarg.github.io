@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Guide | Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/blog/categories/guide/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2014-11-08T11:00:20-05:00</updated>
+  <updated>2015-02-10T20:09:37-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[Go on, Git]]></title>
-    <link href="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/"/>
-    <updated>2014-09-13T13:04:34-04:00</updated>
-    <id>http://agoldvarg.github.io/blog/2014/09/13/go-on-git</id>
-    <content type="html"><![CDATA[<p>Git(hub) - I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
+    <link href="http://agoldvarg.github.io/blog/2015/02/10/go-on-git/"/>
+    <updated>2015-02-10T20:04:34-05:00</updated>
+    <id>http://agoldvarg.github.io/blog/2015/02/10/go-on-git</id>
+    <content type="html"><![CDATA[<p>Git(hub) - Until very recently, I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
 
 <h2>Initial Setup</h2>
 

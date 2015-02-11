@@ -4,7 +4,7 @@
   <title><![CDATA[Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2014-11-08T11:00:20-05:00</updated>
+  <updated>2015-02-10T20:09:37-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -14,50 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Hidden Files, Show Yourselves!]]></title>
-    <link href="http://agoldvarg.github.io/blog/2014/11/02/hidden-files-show-yourselves/"/>
-    <updated>2014-11-02T18:36:35-05:00</updated>
-    <id>http://agoldvarg.github.io/blog/2014/11/02/hidden-files-show-yourselves</id>
-    <content type="html"><![CDATA[<p>&ldquo;How do you show hidden files in Finder?&rdquo;</p>
-
-<p>I had no idea but after some googling I wasn&rsquo;t surprised to find that I could change this setting by entering this simple command into terminal:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ defaults write com.apple.finder AppleShowAllFiles YES #Use 'NO' to reverse the effect</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The change will only take effect after Finder has been restarted - for which we can use the handy <code>killall</code> command:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ killall Finder /System/Library/CoreServices/Finder.app</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Bingo, now I can see hidden files and folders in Finder! But lets take this a step further by creating aliases in <code>.bash_profile</code>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>alias reveal='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-</span><span class='line'>alias rehide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now, I can easily toggle the setting from the command line using my aliases:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ reveal
-</span><span class='line'>$ rehide</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Adding efficiency to my workflow has been one of my favorite parts of this programming journey. I&rsquo;m beginning to look at each and every task as a new automation challenge.</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Go on, Git]]></title>
-    <link href="http://agoldvarg.github.io/blog/2014/09/13/go-on-git/"/>
-    <updated>2014-09-13T13:04:34-04:00</updated>
-    <id>http://agoldvarg.github.io/blog/2014/09/13/go-on-git</id>
-    <content type="html"><![CDATA[<p>Git(hub) - I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
+    <link href="http://agoldvarg.github.io/blog/2015/02/10/go-on-git/"/>
+    <updated>2015-02-10T20:04:34-05:00</updated>
+    <id>http://agoldvarg.github.io/blog/2015/02/10/go-on-git</id>
+    <content type="html"><![CDATA[<p>Git(hub) - Until very recently, I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
 
 <h2>Initial Setup</h2>
 
@@ -154,6 +115,45 @@
 
 
 <p>So, an easy example for getting familiar with git. Next step, a real code  project on my repository!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hidden Files, Show Yourselves!]]></title>
+    <link href="http://agoldvarg.github.io/blog/2014/11/02/hidden-files-show-yourselves/"/>
+    <updated>2014-11-02T18:36:35-05:00</updated>
+    <id>http://agoldvarg.github.io/blog/2014/11/02/hidden-files-show-yourselves</id>
+    <content type="html"><![CDATA[<p>&ldquo;How do you show hidden files in Finder?&rdquo;</p>
+
+<p>I had no idea but after some googling I wasn&rsquo;t surprised to find that I could change this setting by entering this simple command into terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ defaults write com.apple.finder AppleShowAllFiles YES #Use 'NO' to reverse the effect</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The change will only take effect after Finder has been restarted - for which we can use the handy <code>killall</code> command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ killall Finder /System/Library/CoreServices/Finder.app</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bingo, now I can see hidden files and folders in Finder! But lets take this a step further by creating aliases in <code>.bash_profile</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alias reveal='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+</span><span class='line'>alias rehide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, I can easily toggle the setting from the command line using my aliases:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ reveal
+</span><span class='line'>$ rehide</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adding efficiency to my workflow has been one of my favorite parts of this programming journey. I&rsquo;m beginning to look at each and every task as a new automation challenge.</p>
 ]]></content>
   </entry>
   

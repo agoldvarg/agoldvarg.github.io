@@ -9,7 +9,7 @@
   <meta name="author" content="Alex Goldvarg">
 
   
-  <meta name="description" content="&ldquo;How do you show hidden files in Finder?&rdquo; I had no idea but after some googling I wasn&rsquo;t surprised to find that I could change this &hellip;">
+  <meta name="description" content="Git(hub) - Until very recently, I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/11/02/hidden-files-show-yourselves/">Hidden Files, Show Yourselves!</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/02/10/go-on-git/">Go on, Git</a></h1>
     
     
       <p class="meta">
@@ -80,73 +80,14 @@
 
 
 
-<time class='entry-date' datetime='2014-11-02T18:36:35-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>6:36 pm</span></time>
+<time class='entry-date' datetime='2015-02-10T20:04:34-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:04 pm</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>&ldquo;How do you show hidden files in Finder?&rdquo;</p>
-
-<p>I had no idea but after some googling I wasn&rsquo;t surprised to find that I could change this setting by entering this simple command into terminal:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ defaults write com.apple.finder AppleShowAllFiles YES #Use 'NO' to reverse the effect</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The change will only take effect after Finder has been restarted - for which we can use the handy <code>killall</code> command:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ killall Finder /System/Library/CoreServices/Finder.app</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Bingo, now I can see hidden files and folders in Finder! But lets take this a step further by creating aliases in <code>.bash_profile</code>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>alias reveal='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-</span><span class='line'>alias rehide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now, I can easily toggle the setting from the command line using my aliases:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ reveal
-</span><span class='line'>$ rehide</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Adding efficiency to my workflow has been one of my favorite parts of this programming journey. I&rsquo;m beginning to look at each and every task as a new automation challenge.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/13/go-on-git/">Go on, Git</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-13T13:04:34-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>1:04 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Git(hub) - I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
+  <div class="entry-content"><p>Git(hub) - Until very recently, I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
 
 <h2>Initial Setup</h2>
 
@@ -243,6 +184,65 @@
 
 
 <p>So, an easy example for getting familiar with git. Next step, a real code  project on my repository!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/02/hidden-files-show-yourselves/">Hidden Files, Show Yourselves!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-11-02T18:36:35-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>6:36 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&ldquo;How do you show hidden files in Finder?&rdquo;</p>
+
+<p>I had no idea but after some googling I wasn&rsquo;t surprised to find that I could change this setting by entering this simple command into terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ defaults write com.apple.finder AppleShowAllFiles YES #Use 'NO' to reverse the effect</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The change will only take effect after Finder has been restarted - for which we can use the handy <code>killall</code> command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ killall Finder /System/Library/CoreServices/Finder.app</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bingo, now I can see hidden files and folders in Finder! But lets take this a step further by creating aliases in <code>.bash_profile</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alias reveal='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+</span><span class='line'>alias rehide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, I can easily toggle the setting from the command line using my aliases:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ reveal
+</span><span class='line'>$ rehide</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adding efficiency to my workflow has been one of my favorite parts of this programming journey. I&rsquo;m beginning to look at each and every task as a new automation challenge.</p>
 </div>
   
   
@@ -389,11 +389,11 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/11/02/hidden-files-show-yourselves/">Hidden Files, Show Yourselves!</a>
+        <a href="/blog/2015/02/10/go-on-git/">Go on, Git</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/13/go-on-git/">Go on, Git</a>
+        <a href="/blog/2014/11/02/hidden-files-show-yourselves/">Hidden Files, Show Yourselves!</a>
       </li>
     
       <li class="post">
@@ -417,7 +417,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Alex Goldvarg -
+  Copyright &copy; 2015 - Alex Goldvarg -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
