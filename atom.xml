@@ -4,7 +4,7 @@
   <title><![CDATA[Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-10T23:37:46-05:00</updated>
+  <updated>2015-02-11T08:28:12-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -20,16 +20,16 @@
     <id>http://agoldvarg.github.io/blog/2015/02/10/all-right-stop</id>
     <content type="html"><![CDATA[<p>&hellip;Ruby&rsquo;s back with a brand new iteration.</p>
 
-<iframe src="//giphy.com/embed/ufXEskx0lCtxK?html5=true" width="480" height="270" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<iframe src="//giphy.com/embed/ufXEskx0lCtxK?html5=true" width="336" height="189" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
 
-<p>You heard right, the <a href="http://ruby-doc.org/core-2.2.0/Enumerable.html">Enumerable</a> mixin is all about <strong>iteration</strong>, <strong>manipulation</strong> (and a heavy helping of <strong>consternation</strong>).</p>
+<p>You heard right, the <a href="http://ruby-doc.org/core-2.2.0/Enumerable.html">Enumerable</a> mixin is all about <strong>iteration</strong>, <strong>manipulation</strong> (and  heavy helping of <strong>consternation</strong>).</p>
 
-<p>Learning how to use Enumerable methods to manipulate data and objects has been one the most exciting revelations since starting to use Ruby. But to truly understand Enumerable, it helps to drill-down into what the methods are actually doing with the data inputs, how they yield in and out of passed blocks, and finally what kind of results they return.</p>
+<p>Learning how to use Enumerable methods to manipulate data and objects has been one the most exciting revelations since starting to program with Ruby. But to truly understand Enumerable, it helps to drill-down into what the methods are actually doing with the data inputs, how they yield in and out of passed blocks, and finally what kind of results they return.</p>
 
 <h2>Collect</h2>
 
-<p>Within Enumerable, there are several methods that can be used to search through, or filter over a collection of elements. Let&rsquo;s look at <code>collect</code>.  The collect method returns a new array after it yields each element in the original collection into the passed block. Let&rsquo;s look at a simple example:</p>
+<p>Within Enumerable, there are several methods that can be used to search through, or filter over a collection of elements. Let&rsquo;s look at <code>collect</code>.  The collect method returns a new array after it yields each element in the original collection into the passed block. Here&rsquo;s a simple example:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -53,7 +53,7 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">masochist_collect</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">amish_array</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
 </span><span class='line'>  <span class="n">result_array</span> <span class="o">=</span> <span class="o">[]</span>  <span class="c1"># For locally storing our modified elements</span>
 </span><span class='line'>  <span class="k">for</span> <span class="n">iteration</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">length</span> <span class="c1"># Looping 1 time less than our array size</span>
 </span><span class='line'>    <span class="n">result_array</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="k">yield</span> <span class="n">array</span><span class="o">[</span><span class="n">iteration</span><span class="o">]</span><span class="p">)</span> <span class="c1"># Yielding each element to the block and saving the return</span>
@@ -70,7 +70,7 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">avi_says</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Cool&quot;</span><span class="p">,</span> <span class="s2">&quot;So yea&quot;</span><span class="p">,</span> <span class="s2">&quot;Come on&quot;</span><span class="o">]</span>
-</span><span class='line'><span class="n">masochist_collect</span><span class="p">(</span><span class="n">avi_says</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">phrase</span><span class="o">|</span> <span class="n">phrase</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="n">amish_array</span><span class="p">(</span><span class="n">avi_says</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">phrase</span><span class="o">|</span> <span class="n">phrase</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span> <span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">#=&gt; [&quot;Cool!&quot;, &quot;So yea!&quot;, &quot;Come on!&quot;]</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -112,7 +112,7 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">masochist_include?</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">object</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">amish_include?</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">object</span><span class="p">)</span>
 </span><span class='line'>  <span class="n">result</span> <span class="o">=</span> <span class="kp">false</span> <span class="c1"># Setting default result to false, unless we find what we&#39;re looking for</span>
 </span><span class='line'>  <span class="k">for</span> <span class="n">iteration</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">size</span> <span class="c1"># Looping 1 time less than our array size</span>
 </span><span class='line'>    <span class="k">if</span> <span class="n">array</span><span class="o">[</span><span class="n">iteration</span><span class="o">]</span> <span class="o">==</span> <span class="n">object</span> <span class="c1"># Checking for object matches</span>
@@ -144,11 +144,6 @@
 
 
 <p>What a world! So by breaking down a couple of Ruby&rsquo;s built in Enumerable methods we get a better understanding of what&rsquo;s really going on under the hood.</p>
-
-<iframe src="//giphy.com/embed/u3zdWCHYqBRio?html5=true" width="480" height="478" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
-
-
 ]]></content>
   </entry>
   
