@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>All Right Stop. Enumerate and Listen&#8230; - Better Living Through Code</title>
+  <meta name="author" content="Alex Goldvarg">
+
+  
+  <meta name="description" content="&hellip;Ruby&rsquo;s back with a brand new iteration. You heard right, the Enumerable mixin is all about iteration, manipulation (and a heavy helping &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://agoldvarg.github.io/blog/2015/02/10/all-right-stop">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Better Living Through Code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Better Living Through Code</a></h1>
+  
+    <h2>Learning To Code and My Technology Musings.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:agoldvarg.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">All Right Stop. Enumerate and Listen&#8230;</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-10T20:48:31-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:48 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>&hellip;Ruby&rsquo;s back with a brand new iteration.</p>
+
+<iframe src="//giphy.com/embed/ufXEskx0lCtxK?html5=true" width="480" height="270" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<p>You heard right, the <a href="http://ruby-doc.org/core-2.2.0/Enumerable.html">Enumerable</a> mixin is all about <strong>iteration</strong>, <strong>manipulation</strong> (and a heavy helping of <strong>consternation</strong>).</p>
+
+<p>Learning how to use Enumerable methods to manipulate data and objects has been one the most exciting revelations since starting to use Ruby. But to truly understand Enumerable, it helps to drill-down into what the methods are actually doing with the data inputs, how they yield in and out of passed blocks, and finally what kind of results they return.</p>
+
+<h2>Collect</h2>
+
+<p>Within Enumerable, there are several methods that can be used to search through, or filter over a collection of elements. Let&rsquo;s look at <code>collect</code>.  The collect method returns a new array after it yields each element in the original collection into the passed block. Let&rsquo;s look at a simple example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">avi_says</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Cool&quot;</span><span class="p">,</span> <span class="s2">&quot;So yea&quot;</span><span class="p">,</span> <span class="s2">&quot;Come on&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">excited_avi_says</span> <span class="o">=</span> <span class="n">avi_says</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">phrase</span><span class="o">|</span> <span class="n">phrase</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Cool!&quot;, &quot;So yea!&quot;, &quot;Come on!&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, what happened there? Well, we started with an array  called <code>avi_says</code>. We called the <code>.collect</code> method on the array which then passed each element into our block. The code in this block simply adds some much needed punctuation to each passed phrase (which all happen to be strings).  But what&rsquo;s <em>really</em> happening? Like I mentioned, we can build our very own version of the <code>collect</code> method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">masochist_collect</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">result_array</span> <span class="o">=</span> <span class="o">[]</span>  <span class="c1"># For locally storing our modified elements</span>
+</span><span class='line'>  <span class="k">for</span> <span class="n">iteration</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">length</span> <span class="c1"># Looping 1 time less than our array size</span>
+</span><span class='line'>    <span class="n">result_array</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="k">yield</span> <span class="n">array</span><span class="o">[</span><span class="n">iteration</span><span class="o">]</span><span class="p">)</span> <span class="c1"># Yielding each element to the block and saving the return</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="n">result_array</span> <span class="c1"># Returning our modified array</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When we use this sick and twisted collect method and pass it the exact same block, we get the same result that we achieved using the built in <code>collect</code> method!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">avi_says</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Cool&quot;</span><span class="p">,</span> <span class="s2">&quot;So yea&quot;</span><span class="p">,</span> <span class="s2">&quot;Come on&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="n">masochist_collect</span><span class="p">(</span><span class="n">avi_says</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">phrase</span><span class="o">|</span> <span class="n">phrase</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Cool!&quot;, &quot;So yea!&quot;, &quot;Come on!&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>How cool is that?! Let&rsquo;s look at another method within the Enumerable class.</p>
+
+<h2>Include</h2>
+
+<p>The <code>include?</code> method takes a collection as input and iterates through each element comparing them with the passed argument. If any member of the collection matches the passed argument object, the method returns True, otherwise it returns false. The &ldquo;?&rdquo; on the end of the method indicates that true or false will be returned. Oh Ruby, you speak to me.</p>
+
+<p>Let&rsquo;s review the standard behavior and then try to replicate it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">103</span><span class="p">,</span> <span class="s2">&quot;Albatros&quot;</span><span class="p">,</span> <span class="ss">:unitards</span><span class="p">,</span> <span class="s2">&quot;Party&quot;</span><span class="p">,</span> <span class="mi">28</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;Party&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; true</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s try to break this down (I&rsquo;m taking a small liberty here, by passing in two distinct parameters):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">masochist_include?</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">object</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">result</span> <span class="o">=</span> <span class="kp">false</span> <span class="c1"># Setting default result to false, unless we find what we&#39;re looking for</span>
+</span><span class='line'>  <span class="k">for</span> <span class="n">iteration</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">size</span> <span class="c1"># Looping 1 time less than our array size</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">array</span><span class="o">[</span><span class="n">iteration</span><span class="o">]</span> <span class="o">==</span> <span class="n">object</span> <span class="c1"># Checking for object matches</span>
+</span><span class='line'>      <span class="n">result</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># Setting our result if object is matched</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">result</span> <span class="c1"># Returning the result</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And when we call our method:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">103</span><span class="p">,</span> <span class="s2">&quot;Albatros&quot;</span><span class="p">,</span> <span class="ss">:unitards</span><span class="p">,</span> <span class="s2">&quot;Party&quot;</span><span class="p">,</span> <span class="mi">28</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">masochist_include?</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="ss">:unitards</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; true</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">masochist_include?</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="s2">&quot;Loud Noises!&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What a world! So by breaking down a couple of Ruby&rsquo;s built in Enumerable methods we get a better understanding of what&rsquo;s really going on under the hood.</p>
+
+<iframe src="//giphy.com/embed/u3zdWCHYqBRio?html5=true" width="480" height="478" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alex Goldvarg</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-02-10T20:48:31-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:48 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>code</a>, <a class='category' href='/blog/categories/guide/'>guide</a>, <a class='category' href='/blog/categories/how-to/'>how-to</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://agoldvarg.github.io/blog/2015/02/10/all-right-stop/" data-via="" data-counturl="http://agoldvarg.github.io/blog/2015/02/10/all-right-stop/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/12/06/go-on-git/" title="Previous Post: Go On, Git">&laquo; Go On, Git</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/02/10/all-right-stop/">All Right Stop. Enumerate and Listen&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/06/go-on-git/">Go on, Git</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/02/hidden-files-show-yourselves/">Hidden Files, Show Yourselves!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/12/slash-slash-dog-part-i/">// DOG Part I</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/12/well-hello-there/">WELL HELLO THERE</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Alex Goldvarg -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

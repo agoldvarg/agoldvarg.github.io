@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Guide | Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/blog/categories/guide/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-10T20:09:37-05:00</updated>
+  <updated>2015-02-10T23:37:46-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -14,10 +14,145 @@
 
   
   <entry>
+    <title type="html"><![CDATA[All Right Stop. Enumerate and Listen...]]></title>
+    <link href="http://agoldvarg.github.io/blog/2015/02/10/all-right-stop/"/>
+    <updated>2015-02-10T20:48:31-05:00</updated>
+    <id>http://agoldvarg.github.io/blog/2015/02/10/all-right-stop</id>
+    <content type="html"><![CDATA[<p>&hellip;Ruby&rsquo;s back with a brand new iteration.</p>
+
+<iframe src="//giphy.com/embed/ufXEskx0lCtxK?html5=true" width="480" height="270" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<p>You heard right, the <a href="http://ruby-doc.org/core-2.2.0/Enumerable.html">Enumerable</a> mixin is all about <strong>iteration</strong>, <strong>manipulation</strong> (and a heavy helping of <strong>consternation</strong>).</p>
+
+<p>Learning how to use Enumerable methods to manipulate data and objects has been one the most exciting revelations since starting to use Ruby. But to truly understand Enumerable, it helps to drill-down into what the methods are actually doing with the data inputs, how they yield in and out of passed blocks, and finally what kind of results they return.</p>
+
+<h2>Collect</h2>
+
+<p>Within Enumerable, there are several methods that can be used to search through, or filter over a collection of elements. Let&rsquo;s look at <code>collect</code>.  The collect method returns a new array after it yields each element in the original collection into the passed block. Let&rsquo;s look at a simple example:</p>
+
+<pre><code class="ruby">avi_says = ["Cool", "So yea", "Come on"]
+
+excited_avi_says = avi_says.collect { |phrase| phrase + "!" }
+
+#=&gt; ["Cool!", "So yea!", "Come on!"]
+</code></pre>
+
+<p>So, what happened there? Well, we started with an array  called <code>avi_says</code>. We called the <code>.collect</code> method on the array which then passed each element into our block. The code in this block simply adds some much needed punctuation to each passed phrase (which all happen to be strings).  But what&rsquo;s <em>really</em> happening? Like I mentioned, we can build our very own version of the <code>collect</code> method.</p>
+
+<pre><code class="ruby">def masochist_collect(array)
+  result_array = []  # For locally storing our modified elements
+  for iteration in 0...array.length # Looping 1 time less than our array size
+    result_array &lt;&lt; (yield array[iteration]) # Yielding each element to the block and saving the return
+  end
+result_array # Returning our modified array
+end
+</code></pre>
+
+<p>When we use this sick and twisted collect method and pass it the exact same block, we get the same result that we achieved using the built in <code>collect</code> method!
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">avi_says</span> <span class="o">=</span> <span class="o">[&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">Cool</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">So</span> <span class="n">yea</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">Come</span> <span class="n">on</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">]</span>
+</span><span class='line'><span class="n">masochist_collect</span><span class="p">(</span><span class="n">avi_says</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">phrase</span><span class="o">|</span> <span class="n">phrase</span> <span class="o">+</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">!&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;=&gt; [&amp;ldquo;Cool!&amp;rdquo;, &amp;ldquo;So yea!&amp;rdquo;, &amp;ldquo;Come on!&amp;rdquo;]&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="no">How</span> <span class="n">cool</span> <span class="n">is</span> <span class="n">that?</span><span class="o">!</span> <span class="no">Let</span><span class="s1">&#39;s look at another method within the Enumerable class.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s1">Include</span>
+</span><span class='line'><span class="s1">-----------</span>
+</span><span class='line'>
+</span><span class='line'><span class="s1">The `include?` method takes a collection as input and iterates through each element comparing them with the passed argument. If any member of the collection matches the passed argument object, the method returns True, otherwise it returns false. The &quot;?&quot; on the end of the method indicates that true or false will be returned. Oh Ruby, you speak to me.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s1">Let&#39;</span><span class="n">s</span> <span class="n">review</span> <span class="n">the</span> <span class="n">standard</span> <span class="n">behavior</span> <span class="ow">and</span> <span class="k">then</span> <span class="n">try</span> <span class="n">to</span> <span class="n">replicate</span> <span class="ss">it</span><span class="p">:</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">103</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">Albatros</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="ss">:unitards</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">Party</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="mi">28</span><span class="o">]&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;array.include?(&amp;ldquo;Party&amp;rdquo;)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;=&gt;</span> <span class="kp">true</span><span class="o">&lt;</span><span class="sr">/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;array.include?(50)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;=&gt;</span> <span class="kp">false</span><span class="o">&lt;</span><span class="sr">/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;</span>
+</span><span class='line'><span class="sr">Let&#39;s try to break this down (I&#39;m taking a small liberty here, by passing in two distinct parameters):</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;def masochist_include?(array, object)</span>
+</span><span class='line'><span class="sr">  result = false # Setting default result to false, unless we find what we&amp;rsquo;re looking for</span>
+</span><span class='line'><span class="sr">  for iteration in 0&amp;hellip;array.size # Looping 1 time less than our array size</span>
+</span><span class='line'><span class="sr">    if array[iteration] == object # Checking for object matches</span>
+</span><span class='line'><span class="sr">      result = true # Setting our result if object is matched</span>
+</span><span class='line'><span class="sr">    end</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'><span class="sr">  result # Returning the result</span>
+</span><span class='line'><span class="sr">end</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>And when we call our method:</p>
+
+<pre><code class="ruby">array = [103, "Albatros", :unitards, "Party", 28]
+
+masochist_include?(array, :unitards)
+#=&gt; true
+
+masochist_include?(array, "Loud Noises!")
+#=&gt; false
+</code></pre>
+
+<p>What a world! So by breaking down a couple of Ruby&rsquo;s built in Enumerable methods we get a better understanding of what&rsquo;s really going on under the hood.</p>
+
+<iframe src="//giphy.com/embed/u3zdWCHYqBRio?html5=true" width="480" height="478" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Go on, Git]]></title>
-    <link href="http://agoldvarg.github.io/blog/2015/02/10/go-on-git/"/>
-    <updated>2015-02-10T20:04:34-05:00</updated>
-    <id>http://agoldvarg.github.io/blog/2015/02/10/go-on-git</id>
+    <link href="http://agoldvarg.github.io/blog/2014/12/06/go-on-git/"/>
+    <updated>2014-12-06T20:04:34-05:00</updated>
+    <id>http://agoldvarg.github.io/blog/2014/12/06/go-on-git</id>
     <content type="html"><![CDATA[<p>Git(hub) - Until very recently, I&rsquo;ve come across it so many times but never actually taken the plunge. Luckily it&rsquo;s very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.</p>
 
 <h2>Initial Setup</h2>
