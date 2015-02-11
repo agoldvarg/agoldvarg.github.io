@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Go On, Git"
-date: 2014-09-13 13:04:34 -0400
+date: 2014-12-06 21:04:34 -0400
 comments: true
 categories: [code, how-to, guide]
 ---
 
-Git(hub) - I've come across it so many times but never actually taken the plunge. Luckily it's very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.
+Git(hub) - Until very recently, I've come across it so many times but never actually taken the plunge. Luckily it's very straight forward. There are plenty of great guides already out there but this post gives me a chance to practice using git and markdown.
 
 Initial Setup
 -------------
