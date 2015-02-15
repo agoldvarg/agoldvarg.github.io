@@ -4,7 +4,7 @@
   <title><![CDATA[Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-15T13:18:43-05:00</updated>
+  <updated>2015-02-15T16:40:35-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -18,9 +18,9 @@
     <link href="http://agoldvarg.github.io/blog/2015/02/14/keyword-arguments/"/>
     <updated>2015-02-14T22:13:50-05:00</updated>
     <id>http://agoldvarg.github.io/blog/2015/02/14/keyword-arguments</id>
-    <content type="html"><![CDATA[<p>Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I&rsquo;ve run into them as part of the &lsquo;Green Grocer&rsquo; lab at flatiron. I was able to get the lab passing by deductive reasoning but I didn&rsquo;t fully grasp the concept. This blog post is my penance.</p>
+    <content type="html"><![CDATA[<p>Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I&rsquo;ve run into them as part of the &lsquo;Green Grocer&rsquo; lab at <a href="http://flatironschool.com/">Flatiron</a>. I was able to pass the lab using deductive reasoning but I didn&rsquo;t fully grasp the concept. This blog post is my penance.</p>
 
-<p>Let&rsquo;s start with a simple method <code>manipulate_string</code> that expects to receive two arguments; a String and then an Integer:</p>
+<p>Let&rsquo;s start with a simple method <code>manipulate_string</code> that expects to receive two arguments; a String followed by an Integer:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -63,11 +63,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>So, the <code>manipulate_string</code> method does exactly what it&rsquo;s asked. But we know that computers don&rsquo;t like to make assumptions. And so we can&rsquo;t expect the ruby interpreter to make these kinds of decisions.</p>
+<p>So, the <code>manipulate_string</code> method does exactly what its asked. But knowing that computers don&rsquo;t make assumptions we can&rsquo;t expect the ruby interpreter to decide which argument is which.</p>
 
-<p>This method, as written, lacks <a href="https://en.wikipedia.org/wiki/Robustness_%28computer_science%29">robustness</a> in two obvious ways. For one, can only receive an exact amount of arguments. And two, arguments must also be given in the exact order.</p>
+<p>In other words, this method as written lacks <a href="https://en.wikipedia.org/wiki/Robustness_%28computer_science%29">robustness</a> in two obvious ways. First, it can only respond to the exact amount of arguments expected. And two, it&rsquo;s arguments must be given in the exact order as defined in the method.</p>
 
-<p>We can code around the first weakness pretty easily by assigning defaults to each argument:</p>
+<p>We can code around the first weakness pretty easily by assigning defaults to an argument. For example:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -92,7 +92,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>But it&rsquo;s a bit more difficult to protect against the second issue of passing arguments out of order&hellip;</p>
+<p>But it&rsquo;s a bit more difficult to protect against the second issue where we attempt to pass arguments out of order&hellip;</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -125,7 +125,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>That got ugly very quickly. And this fix didn&rsquo;t really address the issue completely. Maybe, we could modify our method to accept a hash, with default values:</p>
+<p>Our method is getting ugly very quickly. And the prior fix didn&rsquo;t really address the issue completely. Maybe we could modify our method to accept a hash with default values:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -154,7 +154,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The previous revision works a <em>bit</em> better. We can now accept arguments in any order. But what happens if we leave out one of the arguments:</p>
+<p>The previous revision works a <em>little bit</em> better in that we can now accept arguments in any order. But what happens if we leave out one of the arguments:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -163,7 +163,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can see that we&rsquo;ll run into the same issue. We can fix this as well - but our method is going to get a bit more complicated:</p>
+<p>You can see that we run into the number of required arguments issue again. This is fixable but our method is going to get more complex:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -202,7 +202,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>WAHOOO! We did it! Although something about the above method just doesn&rsquo;t <em>feel</em> very Ruby-like. You might be thinking - &ldquo;when is he going to get to teh point?!&rdquo; OK, here we go - by using <strong>Keyword Arguments</strong>, we can vastly improve the simplicity and readibility of our previous method without sacrificing any of the functionality. Let&rsquo;s take a look at an example:</p>
+<p>WAHOOO! We did it! Although something about the above revision just doesn&rsquo;t <em>feel</em> very Ruby-like. You might be thinking - &ldquo;when is he going to get to the point?!&rdquo; OK, here we go - by using <strong>Keyword Arguments</strong>, we can vastly improve the simplicity and readibility of our previous method without sacrificing any of the functionality. Let&rsquo;s take a look at our example:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -221,7 +221,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Notice the <code>key: value</code> structure as we define the arguments? We can call this new and improved method and pass missing and/or out-of-order arguments:</p>
+<p>Notice the <code>key: value</code> structure as we define the arguments? We can call this new and improved method without worrying about missing and/or out-of-order arguments:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -238,11 +238,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Wonderful! Ruby can posit that you&rsquo;re passing in hash pairs for arguments. It also knows that you want to have defaults for those arguments, and it doesn&rsquo;t care what order you pass them into the method. That&rsquo;s what I call robust!</p>
+<p>Wonderful! So Ruby can posit that you&rsquo;re passing in hash pairs for these arguments. It also knows that you want to have defaults, and it doesn&rsquo;t care what order you pass each argument into the method. Now that&rsquo;s what I call robust!</p>
 
-<h2>Closing thoughts</h2>
+<h2>Closing Thoughts</h2>
 
-<p>To sum it up, keyword arguments allow you to create dynamic methods that are able to accept arguments in a multitue of ways. I&rsquo;ll definitely keep this tool in my bag of tricks when coding methods going forward. Thanks for reading! Keep coding!</p>
+<p>To sum it up, keyword arguments allow you to create dynamic methods able to accept arguments in a multitude of ways. I&rsquo;ll be keeping this tool handy when coding methods going forward. Thanks for reading and keep coding!</p>
 
 <p><strong>Resources</strong></p>
 
