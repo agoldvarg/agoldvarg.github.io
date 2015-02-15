@@ -9,7 +9,7 @@
   <meta name="author" content="Alex Goldvarg">
 
   
-  <meta name="description" content="&hellip;Ruby&rsquo;s back with a brand new iteration. You heard right, the Enumerable mixin is all about iteration, manipulation (and heavy helping &hellip;">
+  <meta name="description" content="Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I&rsquo;ve run into them as part of the &lsquo;Green Grocer&rsquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,267 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/14/keyword-arguments/">Keyword Arguments</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-14T22:13:50-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I&rsquo;ve run into them as part of the &lsquo;Green Grocer&rsquo; lab at flatiron. I was able to get the lab passing by deductive reasoning but I didn&rsquo;t fully grasp the concept. This blog post is my penance.</p>
+
+<p>Let&rsquo;s start with a simple method <code>manipulate_string</code> that expects to receive two arguments; a String and then an Integer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manipulate_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">volume</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">volume</span> <span class="o">&gt;</span> <span class="mi">6</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">string</span><span class="o">.</span><span class="n">upcase</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">string</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="s2">&quot;let&#39;s jam&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="s2">&quot;bingo bango&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># as expected:</span>
+</span><span class='line'><span class="c1">#=&gt; LET&#39;S JAM</span>
+</span><span class='line'><span class="c1">#=&gt; bingo bango</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># But, if we get a little bit wild:</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="s2">&quot;time to jam&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;bingo bango&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; ArgumentError: wrong number of arguments (1 for 2)</span>
+</span><span class='line'><span class="c1">#=&gt; ArgumentError: comparison of String with 6 failed</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, the <code>manipulate_string</code> method does exactly what it&rsquo;s asked. But we know that computers don&rsquo;t like to make assumptions. And so we can&rsquo;t expect the ruby interpreter to make these kinds of decisions.</p>
+
+<p>This method, as written, lacks <a href="https://en.wikipedia.org/wiki/Robustness_%28computer_science%29">robustness</a> in two obvious ways. For one, can only receive an exact amount of arguments. And two, arguments must also be given in the exact order.</p>
+
+<p>We can code around the first weakness pretty easily by assigning defaults to each argument:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manipulate_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">volume</span> <span class="o">&gt;</span> <span class="mi">6</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">string</span><span class="o">.</span><span class="n">upcase</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">string</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="s2">&quot;let&#39;s jam&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; let&#39;s jam</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But it&rsquo;s a bit more difficult to protect against the second issue of passing arguments out of order&hellip;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manipulate_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">volume</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">string</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="nb">String</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">volume</span> <span class="o">&gt;</span> <span class="mi">6</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="n">string</span><span class="o">.</span><span class="n">upcase</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="n">string</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;bingo bango&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="s2">&quot;bingo bango&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; bingo bango</span>
+</span><span class='line'><span class="c1">#=&gt; bingo bango</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That got ugly very quickly. And this fix didn&rsquo;t really address the issue completely. Maybe, we could modify our method to accept a hash, with default values:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manipulate_string</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="ss">volume</span><span class="p">:</span> <span class="mi">5</span> <span class="p">})</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">options</span><span class="o">[</span><span class="ss">:volume</span><span class="o">]</span> <span class="o">&gt;</span> <span class="mi">6</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">options</span><span class="o">[</span><span class="ss">:string</span><span class="o">].</span><span class="n">upcase</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">options</span><span class="o">[</span><span class="ss">:string</span><span class="o">].</span><span class="n">downcase</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Good Times&quot;</span><span class="p">,</span> <span class="ss">volume</span><span class="p">:</span> <span class="mi">9</span><span class="p">)</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">volume</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Be Quiet&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; GOOD TIMES</span>
+</span><span class='line'><span class="c1">#=&gt; be quiet</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The previous revision works a <em>bit</em> better. We can now accept arguments in any order. But what happens if we leave out one of the arguments:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Be Quiet&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; NoMethodError: undefined method `&gt;&#39; for nil:NilClass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can see that we&rsquo;ll run into the same issue. We can fix this as well - but our method is going to get a bit more complicated:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manipulate_string</span><span class="p">(</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span> <span class="p">)</span>
+</span><span class='line'>  <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="ss">volume</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">options</span> <span class="o">=</span> <span class="n">defaults</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="n">options</span><span class="o">[</span><span class="ss">:volume</span><span class="o">]</span> <span class="o">&gt;</span> <span class="mi">6</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">options</span><span class="o">[</span><span class="ss">:string</span><span class="o">].</span><span class="n">upcase</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">options</span><span class="o">[</span><span class="ss">:string</span><span class="o">].</span><span class="n">downcase</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Good Times&quot;</span><span class="p">,</span> <span class="ss">volume</span><span class="p">:</span> <span class="mi">9</span><span class="p">)</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">volume</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Be Quiet&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Be Quiet&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; GOOD TIMES</span>
+</span><span class='line'><span class="c1">#=&gt; be quiet</span>
+</span><span class='line'><span class="c1">#=&gt; be quiet</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>WAHOOO! We did it! Although something about the above method just doesn&rsquo;t <em>feel</em> very Ruby-like. You might be thinking - &ldquo;when is he going to get to teh point?!&rdquo; OK, here we go - by using <strong>Keyword Arguments</strong>, we can vastly improve the simplicity and readibility of our previous method without sacrificing any of the functionality. Let&rsquo;s take a look at an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manipulate_string</span><span class="p">(</span><span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Nice to see you&quot;</span><span class="p">,</span> <span class="ss">volume</span><span class="p">:</span> <span class="mi">7</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">volume</span> <span class="o">&gt;</span> <span class="mi">6</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">string</span><span class="o">.</span><span class="n">upcase</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">string</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice the <code>key: value</code> structure as we define the arguments? We can call this new and improved method and pass missing and/or out-of-order arguments:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">volume</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Be Quiet&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">string</span><span class="p">:</span> <span class="s2">&quot;Good Times&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">manipulate_string</span><span class="p">(</span><span class="ss">volume</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; be quiet</span>
+</span><span class='line'><span class="c1">#=&gt; GOOD TIMES</span>
+</span><span class='line'><span class="c1">#=&gt; nice to see you</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wonderful! Ruby can posit that you&rsquo;re passing in hash pairs for arguments. It also knows that you want to have defaults for those arguments, and it doesn&rsquo;t care what order you pass them into the method. That&rsquo;s what I call robust!</p>
+
+<h2>Closing thoughts</h2>
+
+<p>To sum it up, keyword arguments allow you to create dynamic methods that are able to accept arguments in a multitue of ways. I&rsquo;ll definitely keep this tool in my bag of tricks when coding methods going forward. Thanks for reading! Keep coding!</p>
+
+<p><strong>Resources</strong></p>
+
+<ul>
+<li>Cooper Press - <a href="https://www.youtube.com/watch?v=u8Q6Of_mScI">6 Minute Guide to Keyword Arguments in Ruby 2.0</a></li>
+<li>Seiji Naganuma - <a href="http://www.seijinaganuma.com/2015/02/keyword-arguments-in-ruby/">Keyword Arguments in Ruby</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -543,6 +804,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/02/14/keyword-arguments/">Keyword Arguments</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/02/10/all-right-stop/">All Right Stop. Enumerate and Listen&#8230;</a>
       </li>
     
@@ -556,10 +821,6 @@
     
       <li class="post">
         <a href="/blog/2014/09/12/slash-slash-dog-part-i/">// DOG Part I</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/09/12/well-hello-there/">WELL HELLO THERE</a>
       </li>
     
   </ul>
