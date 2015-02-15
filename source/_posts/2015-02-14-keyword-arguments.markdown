@@ -6,9 +6,9 @@ comments: true
 categories: [code, how-to, flatiron, ruby, guide]
 ---
 
-Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I've run into them as part of the 'Green Grocer' lab at flatiron. I was able to get the lab passing by deductive reasoning but I didn't fully grasp the concept. This blog post is my penance.
+Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I've run into them as part of the 'Green Grocer' lab at [Flatiron](http://flatironschool.com/). I was able to pass the lab using deductive reasoning but I didn't fully grasp the concept. This blog post is my penance.
 
-Let's start with a simple method `manipulate_string` that expects to receive two arguments; a String and then an Integer:
+Let's start with a simple method `manipulate_string` that expects to receive two arguments; a String followed by an Integer:
 
 ``` ruby
 def manipulate_string(string, volume)
@@ -32,11 +32,11 @@ manipulate_string(2, "bingo bango")
 #=> ArgumentError: comparison of String with 6 failed
 ```
 
-So, the `manipulate_string` method does exactly what it's asked. But we know that computers don't like to make assumptions. And so we can't expect the ruby interpreter to make these kinds of decisions. 
+So, the `manipulate_string` method does exactly what its asked. But knowing that computers don't make assumptions we can't expect the ruby interpreter to decide which argument is which. 
 
-This method, as written, lacks [robustness](https://en.wikipedia.org/wiki/Robustness_%28computer_science%29) in two obvious ways. For one, can only receive an exact amount of arguments. And two, arguments must also be given in the exact order. 
+In other words, this method as written lacks [robustness](https://en.wikipedia.org/wiki/Robustness_%28computer_science%29) in two obvious ways. First, it can only respond to the exact amount of arguments expected. And two, it's arguments must be given in the exact order as defined in the method. 
 
-We can code around the first weakness pretty easily by assigning defaults to each argument:
+We can code around the first weakness pretty easily by assigning defaults to an argument. For example:
 
 ``` ruby
 def manipulate_string(string, volume=5)
@@ -50,7 +50,7 @@ end
 manipulate_string("let's jam")
 #=> let's jam
 ```
-But it's a bit more difficult to protect against the second issue of passing arguments out of order...
+But it's a bit more difficult to protect against the second issue where we attempt to pass arguments out of order...
 
 ``` ruby
 def manipulate_string(string, volume)
@@ -69,7 +69,7 @@ manipulate_string("bingo bango", 2)
 #=> bingo bango
 ```
 
-That got ugly very quickly. And this fix didn't really address the issue completely. Maybe, we could modify our method to accept a hash, with default values:
+Our method is getting ugly very quickly. And the prior fix didn't really address the issue completely. Maybe we could modify our method to accept a hash with default values:
 
 ``` ruby
 def manipulate_string(options = { string: "hello", volume: 5 })
@@ -86,14 +86,14 @@ manipulate_string(volume: 4, string: "Be Quiet")
 #=> be quiet
 ```
 
-The previous revision works a *bit* better. We can now accept arguments in any order. But what happens if we leave out one of the arguments:
+The previous revision works a *little bit* better in that we can now accept arguments in any order. But what happens if we leave out one of the arguments:
 
 ``` ruby
 manipulate_string(string: "Be Quiet")
 #=> NoMethodError: undefined method `>' for nil:NilClass
 ```
 
-You can see that we'll run into the same issue. We can fix this as well - but our method is going to get a bit more complicated:
+You can see that we run into the number of required arguments issue again. This is fixable but our method is going to get more complex:
 
 ``` ruby
 def manipulate_string( options = {} )
@@ -115,7 +115,7 @@ manipulate_string(string: "Be Quiet")
 #=> be quiet
 ```
 
-WAHOOO! We did it! Although something about the above method just doesn't *feel* very Ruby-like. You might be thinking - "when is he going to get to teh point?!" OK, here we go - by using **Keyword Arguments**, we can vastly improve the simplicity and readibility of our previous method without sacrificing any of the functionality. Let's take a look at an example:
+WAHOOO! We did it! Although something about the above revision just doesn't *feel* very Ruby-like. You might be thinking - "when is he going to get to the point?!" OK, here we go - by using **Keyword Arguments**, we can vastly improve the simplicity and readibility of our previous method without sacrificing any of the functionality. Let's take a look at our example:
 
 ``` ruby
 def manipulate_string(string: "Nice to see you", volume: 7)
@@ -127,7 +127,7 @@ def manipulate_string(string: "Nice to see you", volume: 7)
 end
 ```
 
-Notice the `key: value` structure as we define the arguments? We can call this new and improved method and pass missing and/or out-of-order arguments:
+Notice the `key: value` structure as we define the arguments? We can call this new and improved method without worrying about missing and/or out-of-order arguments:
 
 ``` ruby
 manipulate_string(volume: 4, string: "Be Quiet")
@@ -138,12 +138,12 @@ manipulate_string(volume: 3)
 #=> nice to see you
 ```
 
-Wonderful! Ruby can posit that you're passing in hash pairs for arguments. It also knows that you want to have defaults for those arguments, and it doesn't care what order you pass them into the method. That's what I call robust!
+Wonderful! So Ruby can posit that you're passing in hash pairs for these arguments. It also knows that you want to have defaults, and it doesn't care what order you pass each argument into the method. Now that's what I call robust!
 
-Closing thoughts
+Closing Thoughts
 ----------------
 
-To sum it up, keyword arguments allow you to create dynamic methods that are able to accept arguments in a multitue of ways. I'll definitely keep this tool in my bag of tricks when coding methods going forward. Thanks for reading! Keep coding!
+To sum it up, keyword arguments allow you to create dynamic methods able to accept arguments in a multitude of ways. I'll be keeping this tool handy when coding methods going forward. Thanks for reading and keep coding!
 
 **Resources**
 
