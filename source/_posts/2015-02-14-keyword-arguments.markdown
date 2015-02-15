@@ -3,7 +3,7 @@ layout: post
 title: "Keyword Arguments"
 date: 2015-02-14 22:13:50 -0500
 comments: true
-categories: code, flatiron, ruby
+categories: [code, how-to, flatiron, ruby, guide]
 ---
 
 Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I've run into them as part of the 'Green Grocer' lab at flatiron. I was able to get the lab passing by deductive reasoning but I didn't fully grasp the concept. This blog post is my penance.

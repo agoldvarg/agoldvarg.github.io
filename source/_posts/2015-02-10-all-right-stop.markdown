@@ -3,7 +3,7 @@ layout: post
 title: "All right stop. Enumerate and listen..."
 date: 2015-02-10 20:48:31 -0500
 comments: true
-categories: [code, how-to, guide]
+categories: [code, how-to, guide, flatiron]
 ---
 
 ...Ruby's back with a brand new iteration.
