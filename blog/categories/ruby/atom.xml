@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-15T21:52:32-05:00</updated>
+  <updated>2015-02-15T22:07:44-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -69,6 +69,14 @@ manipulate_string("let's jam")
       puts string.upcase
     else
       puts string.downcase
+    end
+  else
+    new_string = volume
+    new_volume = string
+    if new_volume &gt; 6
+      puts new_string.upcase
+    else
+      puts new_string.downcase
     end
   end
 end
