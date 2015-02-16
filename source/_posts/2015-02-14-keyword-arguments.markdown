@@ -6,7 +6,7 @@ comments: true
 categories: [code, how-to, flatiron, ruby, guide]
 ---
 
-Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I've run into them as part of the 'Green Grocer' lab at [Flatiron](http://flatironschool.com/). I was able to pass the lab using deductive reasoning but I didn't fully grasp the concept. This blog post is my penance.
+Keyword arguments were rolled out as part of the Ruby 2.0 release. And recently I've run into them as part of the 'Green Grocer' lab at [Flatiron](http://flatironschool.com/). I worked my way through the lab but I didn't fully grasp what was going on. So through this blog post I hope to solidify the concept.
 
 Let's start with a simple method `manipulate_string` that expects to receive two arguments; a String followed by an Integer:
 
