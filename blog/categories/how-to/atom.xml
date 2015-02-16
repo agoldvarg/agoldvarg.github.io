@@ -4,7 +4,7 @@
   <title><![CDATA[Category: How-to | Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/blog/categories/how-to/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-15T21:44:30-05:00</updated>
+  <updated>2015-02-15T21:52:32-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -45,7 +45,7 @@ manipulate_string(2, "bingo bango")
 
 <p>So, the <code>manipulate_string</code> method does exactly what its asked. But knowing that computers don&rsquo;t make assumptions we can&rsquo;t expect the ruby interpreter to decide which argument is which.</p>
 
-<p>In other words, this method as written lacks <a href="https://en.wikipedia.org/wiki/Robustness_%28computer_science%29">robustness</a> in two obvious ways. First, it can only respond to the exact amount of arguments expected. And two, it&rsquo;s arguments must be given in the exact order as defined in the method.</p>
+<p>In other words, this method as written lacks <a href="https://en.wikipedia.org/wiki/Robustness_%28computer_science%29">robustness</a> in two obvious ways. It can only respond to the exact amount of arguments expected and it&rsquo;s arguments must be given in the exact order as defined in the method.</p>
 
 <p>We can code around the first weakness pretty easily by assigning defaults to an argument. For example:</p>
 
