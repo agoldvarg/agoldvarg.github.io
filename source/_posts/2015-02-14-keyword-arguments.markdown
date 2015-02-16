@@ -34,7 +34,7 @@ manipulate_string(2, "bingo bango")
 
 So, the `manipulate_string` method does exactly what its asked. But knowing that computers don't make assumptions we can't expect the ruby interpreter to decide which argument is which. 
 
-In other words, this method as written lacks [robustness](https://en.wikipedia.org/wiki/Robustness_%28computer_science%29) in two obvious ways. First, it can only respond to the exact amount of arguments expected. And two, it's arguments must be given in the exact order as defined in the method. 
+In other words, this method as written lacks [robustness](https://en.wikipedia.org/wiki/Robustness_%28computer_science%29) in two obvious ways. It can only respond to the exact amount of arguments expected and it's arguments must be given in the exact order as defined in the method. 
 
 We can code around the first weakness pretty easily by assigning defaults to an argument. For example:
 
@@ -59,6 +59,14 @@ def manipulate_string(string, volume)
       puts string.upcase
     else
       puts string.downcase
+    end
+  else
+    new_string = volume
+    new_volume = string
+    if new_volume > 6
+      puts new_string.upcase
+    else
+      puts new_string.downcase
     end
   end
 end
