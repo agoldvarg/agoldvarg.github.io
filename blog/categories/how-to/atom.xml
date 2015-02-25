@@ -4,7 +4,7 @@
   <title><![CDATA[Category: How-to | Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/blog/categories/how-to/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-25T00:21:20-05:00</updated>
+  <updated>2015-02-25T08:35:20-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -83,9 +83,11 @@ Beard.new.tap { |a| a.assign_values(alex) }
 #=&gt; #&lt;Beard:0x007f8af318a170 @name="Alex's Beard", @style="Wispy Wiggins"&gt;
 </code></pre>
 
-<p>Let&rsquo;s review what&rsquo;s going on right there. The assign_values method passes each key from the attribute hash to self. In this context, self represents an instance of the Beard class. More specifically, this particular each method builds setter methods by interpolating the attribute and appending &ldquo;=&rdquo; to the end. The actual value from <code>hash[attribute]</code> is passed in as an argument. Blargh, word soup! What does is all mean? It means one less piece of code to maintain given an expanding or changing set of attributes belonging to the class. Nice!</p>
+<p>Let&rsquo;s review what&rsquo;s going on right there. The assign_values method passes each key from the attribute hash to self. In this context, self represents an instance of the Beard class. More specifically, this particular each method builds setter methods by interpolating the attribute and appending &ldquo;=&rdquo; to the end. The actual value from <code>hash[attribute]</code> is passed in as an argument.</p>
 
-<p>Ruby is kind.</p>
+<p>Blargh, word soup! What does is all mean? It means one less piece of code to maintain given an expanding or changing set of attributes belonging to the class. Nice!</p>
+
+<p>Ruby is love, Ruby is life.</p>
 
 <h2>Closing Thoughts</h2>
 
