@@ -75,9 +75,11 @@ Beard.new.tap { |a| a.assign_values(alex) }
 #=> #<Beard:0x007f8af318a170 @name="Alex's Beard", @style="Wispy Wiggins">
 ```
 
-Let's review what's going on right there. The assign_values method passes each key from the attribute hash to self. In this context, self represents an instance of the Beard class. More specifically, this particular each method builds setter methods by interpolating the attribute and appending "=" to the end. The actual value from `hash[attribute]` is passed in as an argument. Blargh, word soup! What does is all mean? It means one less piece of code to maintain given an expanding or changing set of attributes belonging to the class. Nice!
+Let's review what's going on right there. The assign_values method passes each key from the attribute hash to self. In this context, self represents an instance of the Beard class. More specifically, this particular each method builds setter methods by interpolating the attribute and appending "=" to the end. The actual value from `hash[attribute]` is passed in as an argument.
 
-Ruby is kind.
+Blargh, word soup! What does is all mean? It means one less piece of code to maintain given an expanding or changing set of attributes belonging to the class. Nice!
+
+Ruby is love, Ruby is life.
 
 Closing Thoughts
 ----------------
