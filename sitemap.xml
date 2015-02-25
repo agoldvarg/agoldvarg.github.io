@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://agoldvarg.github.io/blog/2015/02/21/sending-out-an-sos/</loc>
+    <lastmod>2015-02-21T12:32:30-05:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://agoldvarg.github.io/blog/2015/02/14/keyword-arguments/</loc>
     <lastmod>2015-02-14T22:13:50-05:00</lastmod>
     <priority>0.8</priority>
@@ -32,13 +37,13 @@
   </url>
   <url>
     <loc>http://agoldvarg.github.io/blog/archives/</loc>
-    <lastmod>2015-02-15T22:07:44-05:00</lastmod>
+    <lastmod>2015-02-25T00:21:20-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://agoldvarg.github.io/</loc>
-    <lastmod>2015-02-15T22:07:44-05:00</lastmod>
+    <lastmod>2015-02-25T00:21:20-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

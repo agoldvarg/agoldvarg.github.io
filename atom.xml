@@ -4,7 +4,7 @@
   <title><![CDATA[Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-15T22:07:44-05:00</updated>
+  <updated>2015-02-25T00:21:20-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -12,6 +12,143 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[An Introduction to Ruby's .send Method]]></title>
+    <link href="http://agoldvarg.github.io/blog/2015/02/21/sending-out-an-sos/"/>
+    <updated>2015-02-21T12:32:30-05:00</updated>
+    <id>http://agoldvarg.github.io/blog/2015/02/21/sending-out-an-sos</id>
+    <content type="html"><![CDATA[<h2>.send</h2>
+
+<p>Beards, you love them. Why? I&rsquo;m going to tell you. But first, let&rsquo;s talk about Ruby&rsquo;s <code>.send</code> method. Let&rsquo;s look at a few simple examples:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">square</span>
+</span><span class='line'>  <span class="nb">self</span> <span class="o">**</span> <span class="mi">2</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="mi">9</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:square</span><span class="p">)</span>
+</span><span class='line'><span class="s2">&quot;Profound String&quot;</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:reverse</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 81</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;gnirtS dnuoforP&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="n">send</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="mi">5</span>
+</span><span class='line'><span class="c1">#=&gt; 7</span>
+</span><span class='line'><span class="c1"># 2 is the message recipient, + is the sender, or method, </span>
+</span><span class='line'><span class="c1"># and 5 is the argument. Equivalent to 2 + 7.</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;upcase&quot;</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;UPCASE&quot;</span>
+</span><span class='line'><span class="c1"># Whooaaaaaa, metaaaaa</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At first glance, send might not really seem that useful but it can come in handy when abstracting - one of our favorite things to do!  Let&rsquo;s say that we have a class named <code>Beard</code> that we want to instantiate and assign attributes to:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Beard</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:style</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">alex</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Alex&#39;s Beard&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s2">&quot;Wispy Wiggins&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Beard</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">alex</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">alex</span><span class="o">[</span><span class="ss">:style</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; #&lt;Beard:0x007fca52f567d8 @name=&quot;Alex&#39;s Beard&quot;, @style=&quot;Wispy Wiggins&quot;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, the code above works by literally calling each attribute and assigning them individually. Literals present great opportunities for abstraction:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Beard</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">assign_values</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">hash</span><span class="o">.</span><span class="n">each_key</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">attribute</span><span class="si">}</span><span class="s2">=&quot;</span> <span class="p">,</span> <span class="nb">hash</span><span class="o">[</span><span class="n">attribute</span><span class="o">]</span> <span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># In english...</span>
+</span><span class='line'><span class="c1"># Take each key/or attribute (e.g. name, style)</span>
+</span><span class='line'><span class="c1"># Interpolate the attribute to construct a method (e.g. `name=`)</span>
+</span><span class='line'><span class="c1"># Assign the values (e.g. &quot;Alex&#39;s Beard&quot;)</span>
+</span><span class='line'><span class="c1"># All together:</span>
+</span><span class='line'><span class="c1">#   alex[:name] = &quot;Alex&#39;s Beard&quot;</span>
+</span><span class='line'><span class="c1">#   alex[:style] = &quot;Wispy Wiggins&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Beard</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">tap</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span> <span class="n">a</span><span class="o">.</span><span class="n">assign_values</span><span class="p">(</span><span class="n">alex</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; #&lt;Beard:0x007f8af318a170 @name=&quot;Alex&#39;s Beard&quot;, @style=&quot;Wispy Wiggins&quot;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s review what&rsquo;s going on right there. The assign_values method passes each key from the attribute hash to self. In this context, self represents an instance of the Beard class. More specifically, this particular each method builds setter methods by interpolating the attribute and appending &ldquo;=&rdquo; to the end. The actual value from <code>hash[attribute]</code> is passed in as an argument. Blargh, word soup! What does is all mean? It means one less piece of code to maintain given an expanding or changing set of attributes belonging to the class. Nice!</p>
+
+<p>Ruby is kind.</p>
+
+<h2>Closing Thoughts</h2>
+
+<iframe src="//giphy.com/embed/12eFpo8m9htKfu?html5=true" width="480" height="291" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Keyword Arguments]]></title>

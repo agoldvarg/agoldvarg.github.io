@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Guide | Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/blog/categories/guide/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-15T22:07:44-05:00</updated>
+  <updated>2015-02-25T00:21:20-05:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[An Introduction to Ruby's .send Method]]></title>
+    <link href="http://agoldvarg.github.io/blog/2015/02/21/sending-out-an-sos/"/>
+    <updated>2015-02-21T12:32:30-05:00</updated>
+    <id>http://agoldvarg.github.io/blog/2015/02/21/sending-out-an-sos</id>
+    <content type="html"><![CDATA[<h2>.send</h2>
+
+<p>Beards, you love them. Why? I&rsquo;m going to tell you. But first, let&rsquo;s talk about Ruby&rsquo;s <code>.send</code> method. Let&rsquo;s look at a few simple examples:</p>
+
+<pre><code class="ruby">def square
+  self ** 2
+end
+9.send(:square)
+"Profound String".send(:reverse) 
+#=&gt; 81
+#=&gt; "gnirtS dnuoforP"
+
+2.send '+', 5
+#=&gt; 7
+# 2 is the message recipient, + is the sender, or method, 
+# and 5 is the argument. Equivalent to 2 + 7.
+
+a = "upcase"
+a.send(a)
+#=&gt; "UPCASE"
+# Whooaaaaaa, metaaaaa
+</code></pre>
+
+<p>At first glance, send might not really seem that useful but it can come in handy when abstracting - one of our favorite things to do!  Let&rsquo;s say that we have a class named <code>Beard</code> that we want to instantiate and assign attributes to:</p>
+
+<pre><code class="ruby">class Beard
+  attr_accessor :name, :style
+end
+
+alex = {
+  :name =&gt; "Alex's Beard",
+  :style =&gt; "Wispy Wiggins"
+}
+
+Beard.new.tap do |b|
+  b.name = alex[:name]
+  b.style = alex[:style]
+end
+
+#=&gt; #&lt;Beard:0x007fca52f567d8 @name="Alex's Beard", @style="Wispy Wiggins"&gt;
+</code></pre>
+
+<p>So, the code above works by literally calling each attribute and assigning them individually. Literals present great opportunities for abstraction:</p>
+
+<pre><code class="ruby">class Beard
+  def assign_values(hash)
+    hash.each_key do |attribute|
+      self.send( "#{attribute}=" , hash[attribute] )
+    end
+  end
+end
+
+# In english...
+# Take each key/or attribute (e.g. name, style)
+# Interpolate the attribute to construct a method (e.g. `name=`)
+# Assign the values (e.g. "Alex's Beard")
+# All together:
+#   alex[:name] = "Alex's Beard"
+#   alex[:style] = "Wispy Wiggins"
+
+Beard.new.tap { |a| a.assign_values(alex) }
+
+#=&gt; #&lt;Beard:0x007f8af318a170 @name="Alex's Beard", @style="Wispy Wiggins"&gt;
+</code></pre>
+
+<p>Let&rsquo;s review what&rsquo;s going on right there. The assign_values method passes each key from the attribute hash to self. In this context, self represents an instance of the Beard class. More specifically, this particular each method builds setter methods by interpolating the attribute and appending &ldquo;=&rdquo; to the end. The actual value from <code>hash[attribute]</code> is passed in as an argument. Blargh, word soup! What does is all mean? It means one less piece of code to maintain given an expanding or changing set of attributes belonging to the class. Nice!</p>
+
+<p>Ruby is kind.</p>
+
+<h2>Closing Thoughts</h2>
+
+<iframe src="//giphy.com/embed/12eFpo8m9htKfu?html5=true" width="480" height="291" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Keyword Arguments]]></title>
