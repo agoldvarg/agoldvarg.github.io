@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Code | Better Living Through Code]]></title>
   <link href="http://agoldvarg.github.io/blog/categories/code/atom.xml" rel="self"/>
   <link href="http://agoldvarg.github.io/"/>
-  <updated>2015-02-25T08:35:20-05:00</updated>
+  <updated>2015-03-11T21:51:32-04:00</updated>
   <id>http://agoldvarg.github.io/</id>
   <author>
     <name><![CDATA[Alex Goldvarg]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Partially Partials]]></title>
+    <link href="http://agoldvarg.github.io/blog/2015/03/10/the-impartial-partial/"/>
+    <updated>2015-03-10T21:33:48-04:00</updated>
+    <id>http://agoldvarg.github.io/blog/2015/03/10/the-impartial-partial</id>
+    <content type="html"><![CDATA[<h2>Opening Thoughts</h2>
+
+<p>At school, concepts are typically presented from the bottom up. Meaning we start at the detail level and abstract our way from there. After parting with enough blood, sweat, and tears we are granted permission to weild powerful abstractions in all their glory. But this power comes with a cost. We no longer have that feeling of control. All of the sudden, things we practiced doing manually, directly, and purposefully are happening automatically, indirectly, and sometimes accidentally.</p>
+
+<p>  <div align="middle">
+    <iframe align="middle" src="//giphy.com/embed/i0Mdd0b7L2Cf6?html5=true" width="250" height="250" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+  </div></p>
+
+<p>It&rsquo;s important to keep in mind that it <strong>ALWAYS</strong> feels this way. New things are new and they invariably get better with practice. I keep reminding myself that despite greater and greater levels of abstraction, <em>I am still writing the program &ndash; The program is not writing me!</em> Rails is bursting at the seams with generators, macros, and constructor methods designed to make programmers lives easier but you can still accomplish the exact same outcomes at lower levels of abstraction.</p>
+
+<p>Focusing on the basics - DRY, writing clearly, and trying to be efficient in general will naturally lead to incorporating more advanced concepts over time.</p>
+
+<h2>A Partial Example</h2>
+
+<p><em>partial templates</em>: a powerful abstraction built into rails used to abstract reusable portions of html (or haml, or xml etc.) in Ruby (they exist in other languages too). All controllers inherit access to these partials and have the ability to cast data to the partial for rendering. I can&rsquo;t help but draw the comparison between the design and structure used for Ruby method calls and the way partials behave in rails.</p>
+
+<p>As an example, imagine a simple application designed to organize and display a collection of movies and tv shows. Ideally we want to maintain a consitent look and style across views in our application and we&rsquo;d also like to avoid repeating the same snippets of HTML. We could quickly devise a partial for a simple header:</p>
+
+<p>&#8220;`html</p>
+
+<!-- Within views/shared/_header -->
+
+
+<h1>WELCOME TO MEDIABROWSER!</h1>
+
+
+<h1>IT PUTS THE MEAD IN MEDIA.</h1>
+
+
+<h2>You are currently viewing <font color="red"><%= subject.title %></font></h2>
+
+
+
+
+<p><p>
+  Plot summary:
+  &lt;%= subject.plot_summary %>
+</p>
+<code>``
+Now that we've defined the partial, we can call it from any of our other templates - analogous to calling a helper method from a regular Ruby class. This particular partial is expecting to receive a local variable named</code>subject` when called from other views like so:</p>
+
+<pre><code class="html">&lt;!-- Within views/movies/ --&gt;
+&lt;%= render 'shared/header', {subject: @movie} %&gt;
+
+&lt;!-- Within views/tv_shows/ --&gt;
+&lt;%= render 'shared/header', {subject: @show} %&gt;
+</code></pre>
+
+<p>When we visit the show pages for movies and shows, we see the heading, show title, and plot summary HTML elements that we only needed to code once.</p>
+
+<p>Movies/show/1:</p>
+
+<p><img src="/images/mov.png" /></p>
+
+<p>Shows/show/1:</p>
+
+<p><img src="/images/sho.png" /></p>
+
+<p>We can extend this even further because as I mentioned earlier, partials accept collections too. A nice example would be to incorporate a list of Actors as links to the individual Actor&rsquo;s show pages. I am totally going to add to this post once I get a chance to build that&hellip;  Until then</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[An Introduction to Ruby's .send Method]]></title>
