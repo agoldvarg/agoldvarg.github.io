@@ -1,0 +1,148 @@
+---
+layout: post
+title: "Rollin..."
+date: 2015-03-17 22:44:48 -0400
+comments: true
+categories: 
+---
+
+When a website is well written the experience feels intuitive and pleasurable. And in large part the living and breathing compnents are written in javascript allowing the programmer to incorporate all sorts of functionality and interactivity. A cool library I've recently been introduced to is called [Chart.js](http://www.chartjs.org/) which unsurprisingly helps you render charts! To practice my new jQuery skills I came up with a simple data visualization example - rolling crazy dice! Here's what I'm trying to do:
+
+* Allow user entry for both the number of sides on the dice and the number of rolls to simulate
+* Randomly 'roll' the dice based on the given parameters and keep track of the outcomes
+* Display the results in a bar chart using Chart.js
+
+First, I'll layout the basic HTML elements and include several javascript libraries:
+
+```html
+<body>
+  <div class="container">
+    <h1>Oh me? I'm just rolling dice...</h1>
+    
+    <!-- Input box for the # of sides on the dice -->
+    <label for="sides"># of sides:</label>
+    <input type="text" id="sides" autofocus>
+
+    <!-- Input box for the # of rolls to simulate -->
+    <label for="rolls"># of times to roll:</label>
+    <input type="text" id="rolls" ></label>
+
+    <!-- Button that will trigger the dice rolling simulation and render the graph -->
+    <button type="button" class="btn btn-sm btn-success" id="graphin">ROLL</button>
+    <canvas id="coolChartBro" width="750" height="500"></canvas>
+  </div>
+
+    <!-- Loading each of our javascript files -->
+    <script src="js/jquery-2.1.3.min.js" ></script>
+    <script src="js/Chart.js" ></script>
+    <script src="js/justChartin.js" ></script>
+</body>
+```
+
+I've kept the html pretty straight forward in this example - a couple of input text fields for the # of dice sides, # of rolls and a button for submitting with an id of 'graphin'. The only other element on the page is the `<canvas>` tag for injecting the graph - more on that later.
+
+One other thing to point out - the javascript libraries at the bottom of the `<body>` section. Why? Because when the page is rendered, we want the elements to begin loading as quickly as possible. If the javascript libraries were loaded at the top of the page, the most basic static elements of the page would get stuck in the queue. So we always put js library load scripts at the bottom. Let's take a peek at the index page in the browser:
+
+<img src="{{ root_url }}/images/dice1.png" />
+
+Very cool! Now that I've got each of the user input elements laid out nicely. The next step is to write the javascript to generate and render the graph. To do so,I'll definitely need an event listener for when the user clicks the Roll button or when a user hits enter. I know I can knock out both of these via event listeners so I'll add the following snippets:
+
+```javascript
+$(function() {
+  // Waiting for the user to hit the 'Graphin' button
+  $("#graphin").click(function() {
+    draw();
+  });  
+
+  // Allows them to hit enter to initiate the graph function
+  $(document).keypress(function(e) {
+    if (e.which == 13) {
+      e.preventDefault();
+      draw();
+    }
+  });
+});
+```
+
+Quicky, a note on the first bit of code: `$(function() { ... } )` This forces jQuery to wait until the DOM has been completely loaded. Code inside the curly braces will trigger automatically. Why do we do this? Because subsequent jQuery calls rely on specific html elements on the page. If our code were to be triggered before the page has fully loaded, its possible that certain elements would not yet exist - this can break our functionality. So we always nest event listeners inside of the document ready function.
+
+As mentioned above the first listener we need is .click (which is shorthand for `$("#graphin").on('click', function() { ... })` ). When a user clicks on the button named 'graphin', it'll run the `draw` function'.
+
+Similarly, I'm listening for the enter key by using a keypress listener function tied to key #13 (enter). Now that I've got basic listeners setup, it's time to build out the draw function.
+
+I know I'll need to snag the text entered into the fields for # of dice and # of times to roll - so I'll leverage jQuery and feed this value into my function for creating an array of the dice sides (also my labels for the x-axis). The `roll` function will simulate and retain the outcome for each roll instance (to be our y-axis values) using Math.random():
+
+```javascript
+  // Grab the user input for #of sides on the die, and # of rolls to simulate based on their ids
+  var $diceSides = $("#sides").val();
+  var $numTrials = $("#rolls").val();
+
+  // Call the makinLabels function to Convert the # of sides into an array for the x-axis labels
+  var xAxisLabels = makinLabels($diceSides);
+
+  // Making the xAxisLabels array
+  function makinLabels(sides) {
+    var sidesArray = [];
+    for (var i = 1; i <= sides; i++) {
+      sidesArray.push(i);
+    }
+    return sidesArray;
+  }
+
+  // Call the roll function to simulate the # of dice rolls based on user input 
+  var yAxisValues = roll($numTrials, xAxisLabels);
+
+  // Rollin' die (i.e. the y-axis array)
+  function roll(trials, sides) {
+    var outcomesArray = sides.map(function() {
+      return 0;
+    });
+    for (i = 0; i < trials; i++) {
+      outcomesArray[(Math.floor(Math.random() * (sides.length) + 1)) - 1] += 1;
+    }
+    return outcomesArray;
+  }
+```
+At this point, all that is left is calling (i.e. rendering) the bar chart using our arrays (and feeding in a bit of basic formatting):
+
+```javascript
+  // Tell Chart.js where to put the chart
+  var ctx = $("#coolChartBro").get(0).getContext("2d");
+
+
+  // Chart parameters (kind of like interpolation of the x/y arrays we created already)
+  function chartData(xAxisLabels, yAxisValues) {
+    var data = {
+      // Here is where we assign the xAxisLabels (which is an array of dice-sides)
+      labels   : xAxisLabels,
+      datasets : [
+                  {
+            fillColor : 'rgba(153,153,102,0.7)',
+            strokeColor : 'rgba(220,220,220,0.8)',
+            highlightFill : 'rgba(220,220,220,0.75)',
+            highlightStroke : 'rgba(220,220,220,1)',
+            // Here is where we assign the yAxisValues (the randomly generated outcomes)
+            data : yAxisValues
+                  }
+                ]
+              };
+    return data;
+  }
+
+  // Call the chart 'constructor' to actually draw the chart
+  var myLineChart = new Chart(ctx).Bar(chartData(xAxisLabels, yAxisValues));
+```
+
+Below, we can see the result of rolling a six-sided die, a sixty-sided die, and a hundred-and-sixty sided die a million times.
+
+<div align="middle">
+  <iframe src="http://gfycat.com/ifr/JadedBlaringInvisiblerail" frameborder="0" scrolling="no" width="606" height="598" style="-webkit-backface-visibility: hidden;-webkit-transform: scale(1);" ></iframe>
+</div>
+
+Thanks to javascript we can draw the graph to our hearts content **without** needing to refresh the page - pretty awesome!!
+
+Closing Thoughts
+----------------
+
+At this point I've barely even scratched the surface of what can be accomplished using Javascript (and all of the javascript libraries). It really opens up the whole world of functionality for building dynamic web pages and applications and I can't wait to keep experimenting.
+
