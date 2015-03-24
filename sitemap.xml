@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://agoldvarg.github.io/blog/2015/03/17/dice/</loc>
+    <lastmod>2015-03-17T22:44:48-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://agoldvarg.github.io/blog/2015/03/10/the-impartial-partial/</loc>
     <lastmod>2015-03-10T21:33:48-04:00</lastmod>
     <priority>0.8</priority>
@@ -42,13 +47,13 @@
   </url>
   <url>
     <loc>http://agoldvarg.github.io/blog/archives/</loc>
-    <lastmod>2015-03-11T21:51:32-04:00</lastmod>
+    <lastmod>2015-03-23T22:43:26-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://agoldvarg.github.io/</loc>
-    <lastmod>2015-03-11T21:51:32-04:00</lastmod>
+    <lastmod>2015-03-23T22:43:26-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
